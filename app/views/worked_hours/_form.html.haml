@@ -1,4 +1,5 @@
-%h2 Agregar hora
+%h3 Agregar hora
+%hr
 
 = simple_form_for @worked_hour, html: {class: 'form-inline'} do |f|
   = f.input :amount, default: 1.0, wrapper: :append, label: false do
@@ -13,3 +14,5 @@
   = f.association :tag, collection: @tags, include_blank: t('worked_hours.fields.tag'), label: false
 
   = f.submit 'Add', class: 'btn btn-primary'
+
+%hr

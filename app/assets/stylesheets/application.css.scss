@@ -12,3 +12,24 @@
  *= require jquery.ui.datepicker
  *= require_tree .
  */
+
+.gray {
+  background-color: rgb(249, 249, 249);
+}
+
+.green {
+  color: green;
+}
+
+.red {
+  color: red;
+}
+
+.invested {
+  font-weight: bold;
+}
+
+.totals {
+  font-weight: bold;
+  background-color: rgb(223, 240, 216);
+}

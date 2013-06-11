@@ -5,7 +5,7 @@ GeoTickets::Application.routes.draw do
 
   resources :epics
   resources :tickets
-  resources :worked_hours, only: [:create, :update]
+  resources :worked_hours, only: [:create, :update, :destroy]
 
   root :to => 'dashboard#index'
 

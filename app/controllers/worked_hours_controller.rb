@@ -29,4 +29,14 @@ class WorkedHoursController < ApplicationController
     end
   end
 
+  def destroy
+    @worked_hour = WorkedHour.find(params[:id])
+    @worked_hour.destroy
+
+    respond_to do |format|
+      format.html { redirect_to root_path }
+      format.json { head :no_content }
+    end
+  end
+
 end

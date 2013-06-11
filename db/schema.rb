@@ -11,15 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130611200647) do
+ActiveRecord::Schema.define(:version => 20130611202848) do
 
   create_table "epics", :force => true do |t|
     t.string   "name"
     t.date     "start_date"
     t.date     "end_date"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
     t.boolean  "active"
+    t.string   "system_ticket_id"
   end
 
   create_table "tags", :force => true do |t|

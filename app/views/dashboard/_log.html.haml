@@ -1,3 +1,11 @@
+%ul.nav.nav-tabs
+  - (Date.today.beginning_of_week..Date.today).to_a.reverse.each do |day|
+
+    - day_name = day == Date.today ? 'Today' : day.strftime('%A')
+    - link_name = day.strftime('%A').downcase
+
+    %li{ class: "#{ 'active' if day == Date.today }"}= link_to day_name, "##{link_name}", 'data-toggle' => 'tab'
+
 .tab-content
   - (Date.today.beginning_of_week..Date.today).to_a.reverse.each do |day|
 
@@ -12,8 +20,9 @@
           %th Amount
           %th User
           %th Tag
+          %th
 
-        - data = @log[link_name] || []
+        - data = log_data[link_name] || []
         - data.each do |wh|
           %tr
             %td= link_to wh.ticket, ticket_path(wh.ticket)
@@ -22,3 +31,6 @@
             %td= link_to wh.user.name, user_path(wh.user)
             %td
               %span.label= wh.tag.name
+            %td
+              = link_to worked_hour_path(wh), method: :delete, confirm: 'Are you sure?' do
+                %i.icon-remove
