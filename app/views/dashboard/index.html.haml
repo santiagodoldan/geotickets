@@ -1,1 +1,11 @@
 = render 'worked_hours/form'
+
+%ul.nav.nav-tabs
+  - (Date.today.beginning_of_week..Date.today).to_a.reverse.each do |day|
+
+    - day_name = day == Date.today ? 'Today' : day.strftime('%A')
+    - link_name = day.strftime('%A').downcase
+
+    %li{ class: "#{ 'active' if day == Date.today }"}= link_to day_name, "##{link_name}", 'data-toggle' => 'tab'
+
+-# render 'log'

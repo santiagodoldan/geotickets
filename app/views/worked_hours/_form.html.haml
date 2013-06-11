@@ -6,6 +6,7 @@
     %span.add-on.abbn
       Hrs.
 
+  = f.input :description, as: :string, label: false, input_html: {placeholder: t('worked_hours.fields.description')}
   = f.input :on, as: :string, input_html: {class: 'datepicker span2', placeholder: t('worked_hours.fields.date')}, label: false
 
   = f.association :ticket, collection: @tickets, include_blank: t('worked_hours.fields.ticket'), label: false
