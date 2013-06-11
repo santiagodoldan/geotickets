@@ -1,6 +1,3 @@
-%h3 Agregar hora
-%hr
-
 = simple_form_for @worked_hour, html: {class: 'form-inline'} do |f|
   = f.input :amount, default: 1.0, wrapper: :append, label: false do
     = f.input_field :amount, class: 'span1', placeholder: t('worked_hours.fields.amount')
