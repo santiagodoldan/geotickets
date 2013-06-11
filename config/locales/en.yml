@@ -3,3 +3,9 @@
 
 en:
   hello: "Hello world"
+  worked_hours:
+    fields:
+      amount: "Amount"
+      date: "Date"
+      ticket: "Ticket"
+      tag: "Tag"

@@ -1,9 +1,14 @@
 %h2 Agregar hora
 
 = simple_form_for @worked_hour, html: {class: 'form-inline'} do |f|
-  = f.input :amount, default: 1.0
-  = f.input :on, as: :string, input_html: {class: 'datepicker'}
-  = f.association :ticket, collection: @tickets, include_blank: false
-  = f.association :tag, collection: @tags, include_blank: false
+  = f.input :amount, default: 1.0, wrapper: :append, label: false do
+    = f.input_field :amount, class: 'span1', placeholder: t('worked_hours.fields.amount')
+    %span.add-on.abbn
+      Hrs.
+
+  = f.input :on, as: :string, input_html: {class: 'datepicker span2', placeholder: t('worked_hours.fields.date')}, label: false
+
+  = f.association :ticket, collection: @tickets, include_blank: t('worked_hours.fields.ticket'), label: false
+  = f.association :tag, collection: @tags, include_blank: t('worked_hours.fields.tag'), label: false
 
   = f.submit 'Add', class: 'btn btn-primary'
