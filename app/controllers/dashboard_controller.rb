@@ -5,6 +5,8 @@ class DashboardController < ApplicationController
 
     @tags = Tag.all
     @tickets = Ticket.all
+
+    @log = WorkedHour.for_this_week
   end
 
 end

@@ -1,1 +1,31 @@
 = render 'worked_hours/form'
+
+%ul.nav.nav-tabs
+  - (Date.today.beginning_of_week..Date.today).to_a.reverse.each do |day|
+
+    - day_name = day == Date.today ? 'Today' : day.strftime('%A')
+    - link_name = day.strftime('%A').downcase
+
+    %li{ class: "#{ 'active' if day == Date.today }"}= link_to day_name, "##{link_name}", 'data-toggle' => 'tab'
+
+.tab-content
+  - (Date.today.beginning_of_week..Date.today).to_a.reverse.each do |day|
+
+    - day_name = day == Date.today ? 'Today' : day.strftime('%A')
+    - link_name = day.strftime('%A').downcase
+
+    .tab-pane{ class: "#{ 'active' if day == Date.today }", id: link_name }
+      %table.table
+        %tr
+          %th Ticket
+          %th Description
+          %th Amount
+          %th Tag
+
+        - @log[link_name].each do |wh|
+          %tr
+            %td= wh.ticket.name if wh.ticket.present?
+            %td= wh.description
+            %td= wh.amount
+            %td
+              %span.label= wh.tag.name
