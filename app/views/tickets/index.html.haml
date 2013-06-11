@@ -1,0 +1,29 @@
+%h1 Listing tickets
+
+%table.table.table-striped
+  %tr
+    %th Name
+    %th User
+    %th Epic
+    %th Description
+    %th Estimation
+    %th Todo
+    %th
+    %th
+    %th
+
+  - @tickets.each do |ticket|
+    %tr
+      %td= ticket.name
+      %td= ticket.user
+      %td= ticket.epic
+      %td= ticket.description
+      %td= ticket.estimation
+      %td= ticket.todo
+      %td= link_to 'Show', ticket
+      %td= link_to 'Edit', edit_ticket_path(ticket)
+      %td= link_to 'Destroy', ticket, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Ticket', new_ticket_path, class: 'btn btn-primary'

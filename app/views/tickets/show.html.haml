@@ -1,0 +1,24 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @ticket.name
+%p
+  %b User:
+  = @ticket.user
+%p
+  %b Epic:
+  = @ticket.epic
+%p
+  %b Description:
+  = @ticket.description
+%p
+  %b Estimation:
+  = @ticket.estimation
+%p
+  %b Todo:
+  = @ticket.todo
+
+= link_to 'Edit', edit_ticket_path(@ticket)
+\|
+= link_to 'Back', tickets_path

@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  user: 
+  epic: 
+  description: MyText
+  estimation: 
+  todo: 
+
+two:
+  name: MyString
+  user: 
+  epic: 
+  description: MyText
+  estimation: 
+  todo: 

@@ -1,0 +1,23 @@
+%h1 Listing epics
+
+%table.table.table-striped
+  %tr
+    %th Name
+    %th Start date
+    %th End date
+    %th
+    %th
+    %th
+
+  - @epics.each do |epic|
+    %tr
+      %td= epic.name
+      %td= epic.start_date
+      %td= epic.end_date
+      %td= link_to 'Show', epic
+      %td= link_to 'Edit', edit_epic_path(epic)
+      %td= link_to 'Destroy', epic, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Epic', new_epic_path, class: 'btn btn-primary'

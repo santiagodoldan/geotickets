@@ -1,0 +1,22 @@
+= simple_form_for @ticket do |f|
+  - if @ticket.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@ticket.errors.count, "error")} prohibited this ticket from being saved:"
+      %ul
+        - @ticket.errors.full_messages.each do |msg|
+          %li= msg
+
+  .field
+    = f.input :name
+  .field
+    = f.association :user, collection: @users, prompt: 'Ninguno'
+  .field
+    = f.association :epic, collection: @epics, prompt: "Elegí una epic"
+  .field
+    = f.input :description
+  .field
+    = f.input :estimation
+  .field
+    = f.input :todo
+  .actions
+    = f.submit 'Save', class: 'btn btn-primary'

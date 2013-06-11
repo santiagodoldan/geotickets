@@ -1,0 +1,9 @@
+%h2 Agregar hora
+
+= simple_form_for @worked_hour do |f|
+  = f.input :amount, default: 1.0
+  = f.input :on, class: 'datepicker'
+  = f.association :ticket, collection: @tickets, include_blank: false
+  = f.association :tag, collection: @tags, include_blank: false
+
+  = f.submit 'Add', class: 'btn btn-primary'

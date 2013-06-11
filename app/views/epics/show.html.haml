@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @epic.name
+%p
+  %b Start date:
+  = @epic.start_date
+%p
+  %b End date:
+  = @epic.end_date
+
+= link_to 'Edit', edit_epic_path(@epic)
+\|
+= link_to 'Back', epics_path
