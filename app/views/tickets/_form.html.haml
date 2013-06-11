@@ -9,6 +9,8 @@
   .field
     = f.input :name
   .field
+    = f.input :system_ticket_id
+  .field
     = f.association :user, collection: @users, prompt: 'Ninguno'
   .field
     = f.association :epic, collection: @epics, prompt: "Elegí una epic"

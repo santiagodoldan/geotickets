@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130611194214) do
+ActiveRecord::Schema.define(:version => 20130611200647) do
 
   create_table "epics", :force => true do |t|
     t.string   "name"
@@ -35,8 +35,9 @@ ActiveRecord::Schema.define(:version => 20130611194214) do
     t.text     "description"
     t.float    "estimation"
     t.float    "todo"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.string   "system_ticket_id"
   end
 
   add_index "tickets", ["epic_id"], :name => "index_tickets_on_epic_id"
