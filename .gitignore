@@ -1,1 +1,4 @@
 tmp/*
+.rvmrc
+db/database.yml
+log/*
