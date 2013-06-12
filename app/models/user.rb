@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
-  attr_accessible :name
+
+  attr_accessible :name, :hours_of_work
 
   has_many :worked_hours
 

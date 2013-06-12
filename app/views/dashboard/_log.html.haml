@@ -1,3 +1,12 @@
+- today_hours = log_data[Date.today.strftime('%A').downcase].sum(&:amount)
+
+- if current_user.hours_of_work > today_hours
+  .alert
+    %strong
+      Missing hours!!
+    You need to enter #{current_user.hours_of_work - today_hours} hours for today.
+
+
 %ul.nav.nav-tabs
   - (Date.today.beginning_of_week..Date.today).to_a.reverse.each do |day|
 
@@ -9,7 +18,6 @@
 .tab-content
   - (Date.today.beginning_of_week..Date.today).to_a.reverse.each do |day|
 
-    - day_name = day == Date.today ? 'Today' : day.strftime('%A')
     - link_name = day.strftime('%A').downcase
 
     .tab-pane{ class: "#{ 'active' if day == Date.today }", id: link_name }

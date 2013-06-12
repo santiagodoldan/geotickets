@@ -14,5 +14,6 @@ class ApplicationController < ActionController::Base
   def current_user
     @user = User.find_by_id(cookies[:user_id])
   end
+  helper_method :current_user
 
 end
