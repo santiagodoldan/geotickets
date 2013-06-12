@@ -10,6 +10,8 @@
  *
  *= require_self
  *= require jquery.ui.datepicker
+ *= require bootstrap_and_overrides
+ *= require font-awesome
  *= require_tree .
  */
 
@@ -32,4 +34,9 @@
 .totals {
   font-weight: bold;
   background-color: rgb(223, 240, 216);
+}
+
+a.with-icon {
+  text-decoration: none !important;
+  color: #333333 !important;
 }

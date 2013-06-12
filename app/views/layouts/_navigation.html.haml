@@ -3,10 +3,14 @@
 %ul.nav
   - if current_user
     %li
-      = link_to('Logout', user_path(current_user.id), method: 'delete')
-    %li
       = link_to(Epic.model_name.human.pluralize, epics_path)
     %li
       = link_to('Tickets', tickets_path)
     %li
       = link_to('Tags', tags_path)
+%ul.nav.pull-right
+  - if current_user
+    %li
+      = link_to(user_path(current_user.id), method: 'delete') do
+        %i.icon-signout
+        Logout
