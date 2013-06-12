@@ -1,6 +1,7 @@
-- today_hours = log_data[Date.today.strftime('%A').downcase].sum(&:amount)
+- today_data  = log_data[Date.today.strftime('%A').downcase]
+- today_hours = today_data.sum(&:amount) if today_data.present?
 
-- if current_user.hours_of_work > today_hours
+- if today_data.present? && current_user.hours_of_work > today_hours
   .alert
     %strong
       Missing hours!!
