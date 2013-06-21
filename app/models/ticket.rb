@@ -10,6 +10,10 @@ class Ticket < ActiveRecord::Base
   validates :epic, :name, :estimation, :presence => true
 
   def to_s
+    system_ticket_and_name
+  end
+
+  def system_ticket_and_name
     "#{system_ticket_id} - #{name}"
   end
 
