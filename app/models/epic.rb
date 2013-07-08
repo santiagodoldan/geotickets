@@ -21,4 +21,8 @@ class Epic < ActiveRecord::Base
     tickets.sum(&:estimation)
   end
 
+  def to_s
+    "#{system_ticket_id} #{name}"
+  end
+
 end
