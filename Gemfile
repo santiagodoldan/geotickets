@@ -10,6 +10,7 @@ gem 'bootstrap-sass'
 gem 'haml'
 gem 'simple_form'
 gem 'haml-rails'
+gem 'pg'
 
 # Gems used only for assets and not required
 # in production environments by default.
