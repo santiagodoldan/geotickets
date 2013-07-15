@@ -1,8 +1,7 @@
 class WorkedHoursController < ApplicationController
 
   def create
-    @worked_hour = WorkedHour.new(params[:worked_hour])
-    @worked_hour.user = current_user
+    @worked_hour = current_user.worked_hours.new(params[:worked_hour])
 
     respond_to do |format|
       if @worked_hour.save
@@ -16,7 +15,7 @@ class WorkedHoursController < ApplicationController
   end
 
   def update
-    @worked_hour = WorkedHour.find(params[:id])
+    @worked_hour = current_user.worked_hours.find(params[:id])
 
     respond_to do |format|
       if @worked_hour.update_attributes(params[:worked_hour])
@@ -30,7 +29,7 @@ class WorkedHoursController < ApplicationController
   end
 
   def destroy
-    @worked_hour = WorkedHour.find(params[:id])
+    @worked_hour = current_user.worked_hours.find(params[:id])
     @worked_hour.destroy
 
     respond_to do |format|

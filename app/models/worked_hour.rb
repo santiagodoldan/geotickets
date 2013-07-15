@@ -17,7 +17,9 @@ class WorkedHour < ActiveRecord::Base
   end
 
   def update_todo_hours
-    ticket_to_update = Ticket.find(self.ticket_id)
+    return true unless self.ticket
+
+    ticket_to_update = self.ticket
     ticket_to_update.update_attributes(todo: ticket_to_update.todo - self.amount)
   end
 
