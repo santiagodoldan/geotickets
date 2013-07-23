@@ -8,6 +8,10 @@ en:
         one: "Story"
         other: "Stories"
 
+  time:
+    formats:
+      default: "%Y-%m-%d"
+
   worked_hours:
     fields:
       number: "HH:mm"
