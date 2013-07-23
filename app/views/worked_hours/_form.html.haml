@@ -12,5 +12,6 @@
   = f.association :ticket, collection: @tickets, label_method: :system_ticket_and_name, include_blank: t('worked_hours.fields.ticket'), label: false
   = f.association :tag, collection: @tags, include_blank: t('worked_hours.fields.tag'), label: false, input_html: {class: 'input-medium'}
 
-  = f.submit 'Add', class: 'btn btn-primary', 'ng-click' => 'submit()'
+  = button_tag class: 'btn btn-primary', 'ng-click' => 'submit()' do
+    %i.icon-plus
 %hr

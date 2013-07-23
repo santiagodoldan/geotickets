@@ -1,3 +1,7 @@
+= link_to new_ticket_path, class: 'btn btn-primary pull-right new-record-button' do
+  %i.icon-plus
+  New Ticket
+
 %h1 Listing tickets
 
 %table.table.table-striped
@@ -25,7 +29,3 @@
       %td= link_to 'Show', ticket
       %td= link_to 'Edit', edit_ticket_path(ticket)
       %td= link_to 'Destroy', ticket, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
-
-= link_to 'New Ticket', new_ticket_path, class: 'btn btn-primary'

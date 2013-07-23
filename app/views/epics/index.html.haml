@@ -1,3 +1,7 @@
+= link_to new_epic_path, class: 'btn btn-primary pull-right new-record-button' do
+  %i.icon-plus
+  New Story
+
 %h1= "Listing #{Epic.model_name.human.pluralize}"
 
 %table.table.table-striped
@@ -17,7 +21,3 @@
       %td= link_to 'Show', epic
       %td= link_to 'Edit', edit_epic_path(epic)
       %td= link_to 'Destroy', epic, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
-
-= link_to "New #{Epic.model_name.human}", new_epic_path, class: 'btn btn-primary'

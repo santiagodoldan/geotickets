@@ -1,3 +1,7 @@
+= link_to new_tag_path, class: 'btn btn-primary pull-right new-record-button' do
+  %i.icon-plus
+  New Tag
+
 %h1 Listing tags
 
 %table.table.table-striped
@@ -13,7 +17,3 @@
       %td= link_to 'Show', tag
       %td= link_to 'Edit', edit_tag_path(tag)
       %td= link_to 'Destroy', tag, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
-%br
-
-= link_to 'New Tag', new_tag_path, class: 'btn btn-primary'

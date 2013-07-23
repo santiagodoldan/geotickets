@@ -1,11 +1,14 @@
 class WorkedHour < ActiveRecord::Base
+
+  after_create :update_todo_hours
+
   belongs_to :user
   belongs_to :ticket
   belongs_to :tag
 
-  attr_accessible :amount, :on, :tag_id, :ticket_id, :description
+  validates :tag, :user, presence: true
 
-  after_create :update_todo_hours
+  attr_accessible :amount, :on, :tag_id, :ticket_id, :description
 
   class << self
 
