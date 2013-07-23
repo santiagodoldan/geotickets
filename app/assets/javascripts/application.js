@@ -14,4 +14,6 @@
 //= require jquery_ujs
 //= require jquery.ui.datepicker
 //= require bootstrap
+//= require angular.min
+//= require underscore-min
 //= require_tree .

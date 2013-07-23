@@ -10,7 +10,7 @@ en:
 
   worked_hours:
     fields:
-      number: "Number"
+      number: "HH:mm"
       date: "Date"
       ticket: "Ticket"
       tag: "Tag"

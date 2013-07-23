@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130621173032) do
+ActiveRecord::Schema.define(:version => 20130723021444) do
 
   create_table "epics", :force => true do |t|
     t.string   "name"
@@ -21,22 +21,6 @@ ActiveRecord::Schema.define(:version => 20130621173032) do
     t.datetime "updated_at",       :null => false
     t.boolean  "active"
     t.string   "system_ticket_id"
-  end
-
-  create_table "plannings", :force => true do |t|
-    t.float    "hours"
-    t.date     "on"
-    t.integer  "user_id"
-    t.integer  "project_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "projects", :force => true do |t|
-    t.string   "name"
-    t.text     "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
   end
 
   create_table "tags", :force => true do |t|
@@ -68,12 +52,12 @@ ActiveRecord::Schema.define(:version => 20130621173032) do
   end
 
   create_table "worked_hours", :force => true do |t|
-    t.float    "amount"
+    t.decimal  "amount",      :precision => 22, :scale => 20
     t.integer  "user_id"
     t.integer  "ticket_id"
     t.date     "on"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
     t.integer  "tag_id"
     t.text     "description"
   end

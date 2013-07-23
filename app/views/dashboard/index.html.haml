@@ -5,7 +5,7 @@
     %li= link_to epic.system_ticket_id, "#epic-#{epic.id}", 'data-toggle' => 'tab'
 
 .tab-content
-  .tab-pane.active{ id: 'hours' }
+  .tab-pane.active{id: 'hours', 'ng-app' => true}
     = render 'worked_hours/form'
     = render 'log', log_data: @log
   - @epics.each do |epic|

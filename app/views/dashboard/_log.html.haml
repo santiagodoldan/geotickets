@@ -5,7 +5,7 @@
   .alert
     %strong
       Missing hours!!
-    You need to enter #{current_user.hours_of_work - today_hours} hours for today.
+    You need to enter #{convert_to_hours_format(current_user.hours_of_work - today_hours)} hours for today.
 
 
 %ul.nav.nav-tabs
@@ -39,7 +39,7 @@
             - else
               %td None
             %td= wh.description
-            %td= wh.amount
+            %td= convert_to_hours_format(wh.amount)
             %td= link_to wh.user.name, user_path(wh.user)
             %td
               %span.label= wh.tag.name
