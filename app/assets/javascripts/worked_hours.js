@@ -2,8 +2,7 @@ $(function() {
   $('.datepicker').datepicker({'dateFormat': 'yy-mm-dd'});
 });
 
-function WorkedHoursCtrl($scope) {
-
+var WorkedHoursCtrl = ['$scope', '$http', function($scope, $http) {
   $scope.disabled= false;
 
   var splitHours = function(hours) {
@@ -25,5 +24,5 @@ function WorkedHoursCtrl($scope) {
   $scope.submit = function() {
     $scope.disabled= true;
   };
-
-}
+  
+}];
