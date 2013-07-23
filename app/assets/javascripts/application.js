@@ -16,4 +16,3 @@
 //= require bootstrap
 //= require angular.min
 //= require underscore-min
-//= require_tree .

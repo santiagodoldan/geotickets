@@ -11,3 +11,5 @@
   - @epics.each do |epic|
     .tab-pane{ id: "epic-#{epic.id}" }
       = render 'statistic', epic: epic, tags: @tags
+
+= javascript_include_tag :worked_hours
