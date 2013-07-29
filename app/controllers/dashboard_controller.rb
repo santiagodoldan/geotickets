@@ -7,7 +7,11 @@ class DashboardController < ApplicationController
     @tickets = Ticket.all
     @epics = Epic.all
 
-    @log = WorkedHour.for_this_week
+    if (week_date = params[:week_date].try(:to_date)).present?
+      @log = WorkedHour.in_week(week_date).grouped_by_day
+    else
+      @log = WorkedHour.for_this_week
+    end
   end
 
 end
