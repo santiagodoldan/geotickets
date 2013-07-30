@@ -16,33 +16,3 @@
 
     %li{ class: "#{ 'active' if day == Date.today }"}= link_to day_name, "##{link_name}", 'data-toggle' => 'tab'
 
-.tab-content
-  - (Date.today.beginning_of_week..Date.today).to_a.reverse.each do |day|
-
-    - link_name = day.strftime('%A').downcase
-
-    .tab-pane{ class: "#{ 'active' if day == Date.today }", id: link_name }
-      %table.table
-        %tr.gray
-          %th Ticket
-          %th Description
-          %th Amount
-          %th User
-          %th Tag
-          %th
-
-        - data = log_data[link_name] || []
-        - data.each do |wh|
-          %tr
-            - if wh.ticket
-              %td= link_to wh.ticket, ticket_path(wh.ticket)
-            - else
-              %td None
-            %td= wh.description
-            %td= convert_to_hours_format(wh.amount)
-            %td= link_to wh.user.name, user_path(wh.user)
-            %td
-              %span.label= wh.tag.name
-            %td
-              = link_to worked_hour_path(wh), method: :delete, confirm: 'Are you sure?', class: 'with-icon' do
-                %i.icon-remove

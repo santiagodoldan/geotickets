@@ -19,6 +19,10 @@ class WorkedHour < ActiveRecord::Base
 
   end
 
+  def as_json(options = {})
+    super(options.merge(include: {ticket: {only: [:name]}, tag: {only: :name}, user: {only: [:id, :name]}}))
+  end
+
   def update_todo_hours
     return true unless self.ticket
 

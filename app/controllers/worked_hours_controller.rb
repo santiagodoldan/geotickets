@@ -1,17 +1,19 @@
 class WorkedHoursController < ApplicationController
 
-  def create
-    @worked_hour = current_user.worked_hours.new(params[:worked_hour])
+  layout false
 
-    respond_to do |format|
-      if @worked_hour.save
-        format.html { redirect_to root_path, notice: 'La hora se agrego correctamente' }
-        format.json { render json: @worked_hour, status: :created, location: @worked_hour }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @worked_hour.errors, status: :unprocessable_entity }
-      end
-    end
+  respond_to :json, :html
+
+  def index
+    @worked_hour = WorkedHour.scoped
+
+    respond_with(@worked_hour)
+  end
+
+  def create
+    @worked_hour = current_user.worked_hours.create(params[:worked_hour])
+
+    respond_with(@worked_hour)
   end
 
   def update
