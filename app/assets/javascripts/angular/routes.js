@@ -4,7 +4,7 @@ Geoticket.config(['$routeProvider', function($routeProvider) {
   $routeProvider.
     when('/', {
       controller: 'WorkedHoursListCtrl',
-      templateUrl: '/assets/templates/worked_hours/index.html'
+      templateUrl: Routes.worked_hours_path({format: 'angr'})
     }).
     
     when('/users/:user_id', {

@@ -23,6 +23,22 @@ ActiveRecord::Schema.define(:version => 20130723021444) do
     t.string   "system_ticket_id"
   end
 
+  create_table "plannings", :force => true do |t|
+    t.float    "hours"
+    t.date     "on"
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "projects", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
   create_table "tags", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false

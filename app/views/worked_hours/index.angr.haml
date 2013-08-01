@@ -1,0 +1,35 @@
+
+%h4 Ingreso de Horas:
+
+= render 'form'
+
+%h4 Listado de horas trabajadas:
+
+%table.table.table-bordered
+  %thead
+    %th Ticket
+    %th Description
+    %th Quantity
+    %th User
+    %th Tag
+    %th Actions
+  %tbody
+    %tr{'ng-repeat' => 'worked_hour in worked_hours'}
+      %td
+        {{worked_hour.ticket.name | showValueOrNone}}
+      %td
+        {{worked_hour.description}}
+      %td
+        {{worked_hour.amount | hoursAndMinutes}}
+      %td
+        = link_to '{{worked_hour.user.name}}', '/users/{{worked_hour.user.id}}'
+      %td
+        %span.label {{worked_hour.tag.name}}
+      %td.span2
+        = link_to '#', class: 'btn btn-mini btn-primary', 'ng-click' => 'edit($index)' do
+          Edit
+          %i.icon-edit
+        = link_to '#', class: 'btn btn-mini btn-danger', 'ng-click' => 'remove($index)' do
+          Delete
+          %i.icon-remove
+          
