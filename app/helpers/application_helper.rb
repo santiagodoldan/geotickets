@@ -9,7 +9,7 @@ module ApplicationHelper
   end
 
   def end_week_date
-    week_date.end_of_week
+    week_date.end_of_week - 2.days
   end
 
   def current_week_range

@@ -1,12 +1,3 @@
-- today_data  = log_data[Date.today.strftime('%A').downcase]
-- today_hours = today_data.sum(&:amount) if today_data.present?
-
-- if today_data.present? && current_user.hours_of_work > today_hours
-  .alert
-    %strong
-      Missing hours!!
-    You need to enter #{convert_to_hours_format(current_user.hours_of_work - today_hours)} hours for today.
-
 = form_tag root_path, class: 'form-inline pull-right range-worked-hours-form' do
   = label_tag :week_date, 'Hours by Week: '
   = text_field_tag :week_date, l(start_week_date), class: 'datepicker span2'
@@ -14,18 +5,31 @@
     %span.add-on
       %i.icon-search
 
+
+%h3{style: 'color: grey'}
+  - if start_week_date.month != end_week_date.month
+    = "##{start_week_date.strftime('%B')}/##{end_week_date.strftime('%B')}"
+  - else
+    = "##{start_week_date.strftime('%B')}"
+
 %ul.nav.nav-tabs
-  - current_week_range.to_a.reverse.each_with_index do |day, index|
+  - current_week_range.each_with_index do |day, index|
     - link_name = day.strftime('%A').downcase
 
     %li{class: active_by_today_or_index(day, index)}
-      = link_to day.strftime('%A'), "##{link_name}", 'data-toggle' => 'tab'
+      = link_to day.strftime('%d - %A'), "##{link_name}", 'data-toggle' => 'tab'
 
 .tab-content
-  - current_week_range.to_a.reverse.each_with_index do |day, index|
+  - current_week_range.each_with_index do |day, index|
+    - worked_hours = log_data[day.strftime('%A').downcase].try(:sum, &:amount)
     - link_name = day.strftime('%A').downcase
 
     .tab-pane{class: active_by_today_or_index(day, index), id: link_name}
+      - if current_user.missing_hours?(worked_hours)
+        .alert
+          %strong Missing hours!!
+          You need to enter #{convert_to_hours_format(current_user.hours_missing(worked_hours))} hours.
+
       %table.table
         %tr.gray
           %th Ticket
