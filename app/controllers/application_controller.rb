@@ -2,6 +2,8 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery
 
+  respond_to :json
+
   before_filter :check_user, :current_user
 
   layout :select_layout
@@ -9,15 +11,13 @@ class ApplicationController < ActionController::Base
   private
 
   def check_user
-    #unless cookies[:user_id].present?
-    #  redirect_to users_path
-    #end
+    #raise 'User not logger In' unless cookies[:user_id].present?
   end
 
   def current_user
-    @user = User.find_by_id(cookies[:user_id])
+    @current_user ||= User.first
+    #@current_user ||= User.find_by_id(cookies[:user_id])
   end
-  helper_method :current_user
 
   def select_layout
     if params[:format] == 'angr'
