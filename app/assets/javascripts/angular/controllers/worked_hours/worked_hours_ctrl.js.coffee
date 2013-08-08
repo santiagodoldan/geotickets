@@ -1,8 +1,25 @@
-@Geoticket.controller 'WorkedHoursCtrl', ['$scope', 'hour', ($scope, hour) ->
-  $scope.worked_hour= {}
+# Inherits from WorkedHoursListCtrl
+#
+@Geoticket.controller 'WorkedHoursCtrl', ($scope, hours) ->
+  $scope.worked_hour = {}
 
+  # Creates a new WorkedHour and clear previous selections.
+  #
   $scope.submit = ->
-    $scope.worked_hour.amount= hour.convertNumber($scope.worked_hour.amount)
-    $scope.new($scope.worked_hour)
+    worked_hours = angular.copy($scope.worked_hour)
 
-]
+    $scope.worked_hour = {}
+
+    worked_hours.on= $scope.current_date.toString('yyyy-MM-dd')
+    worked_hours.amount= hours.convertNumber(worked_hours.amount)
+
+    $scope.new(worked_hours)
+
+  # Clears populated data.
+  #
+  $scope.clear = ->
+    $scope.worked_hour = {}
+
+# WorkedHoursCtrl's Dependency Injection
+#
+.$inject = ['$scope', 'hours']

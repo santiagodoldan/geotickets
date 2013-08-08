@@ -1,0 +1,19 @@
+#stories-available
+  %select.input-large{'ui-select2' => true, 'ng-model' => 'story_id', data: {placeholder: 'Select an Story'}}
+    %option
+    %option{'ng-repeat' => 'story in stories', value: '{{story.id}}'}
+      {{story.name}}
+
+  %a.btn.btn-primary{'ng-init' => 'collapsed=true', 'ng-click' => 'collapsed= !collapsed'}
+    %span.add-on
+      %i.icon-plus{'ng-show' => 'collapsed'}
+      %i.icon-minus{'ng-hide' => 'collapsed'}
+
+  #new-story-wrapper{collapse: 'collapsed'}
+    .well.well-large
+      = render 'templates/stories/form'
+
+#worked-hours
+  %h1 Worked hours
+
+  = render '/templates/worked_hours/worked_hours'

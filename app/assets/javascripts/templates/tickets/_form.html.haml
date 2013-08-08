@@ -1,0 +1,16 @@
+#ticket-form{'ng-controller' => 'TicketsCtrl'}
+  = form_tag '', class: 'form-inline', name: 'new_ticket_form' do
+    .control-group
+      .controls
+        = text_field_tag :system_ticket_id,  nil, class: 'input-mini', 
+                                            'ng-model' => 'ticket.system_ticket_id',
+                                            placeholder: 'Ticket ID', 'ng-required' => true
+      .controls
+        = text_field_tag :name,  nil, class: 'input-xlarge', 'ng-model' => 'ticket.name',
+                                            placeholder: 'Name', 'ng-required' => true
+      .controls
+        = text_field_tag :estimation,  nil, class: 'input-medium', 'ng-model' => 'ticket.estimation',
+                                            placeholder: 'Estimation', 'ng-required' => true
+      .controls
+        %button{class: 'btn btn-primary', 'ng-disabled' => 'new_ticket_form.$invalid', 'ng-click' => 'submit()'}
+          Add

@@ -1,0 +1,16 @@
+#new-story-form{'ng-controller' => 'StoryCtrl'}
+  = form_tag '', class: 'form-inline', name: 'new_story' do
+    .control-group
+      .controls
+        = text_field_tag :system_ticket_id,  nil, class: 'input-mini', placeholder: 'Story ID',
+                                                  'ng-required' => 'true',
+                                                  'ng-model' => 'story.system_ticket_id'
+      .controls
+        = text_field_tag :name,  nil, class: 'input-xxlarge', placeholder: 'Name',
+                                      'ng-required' => 'true',
+                                      'ng-model' => 'story.name'
+      .controls
+        %button{class: 'btn btn-primary', 'ng-click' => 'submit()', 'ng-disabled' => 'new_story.$invalid'}
+          Save
+        %button{class: 'btn btn-primary', 'ng-click' => 'submitAndClose()', 'ng-disabled' => 'new_story.$invalid'}
+          Save and Close

@@ -20,6 +20,8 @@
 //= require angular.min
 //= require angular-resource.min
 //= require angular-ui-select2
+//= require angular-ui-bootstrap
+//= require date
 //= require app
 //= require_tree ./angular
 //= require_tree ./templates

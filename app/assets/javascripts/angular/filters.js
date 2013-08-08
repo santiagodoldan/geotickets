@@ -12,8 +12,12 @@ Geoticket.filter('showValueOrNone', [function() {
 
 Geoticket.filter('hoursAndMinutes', [function() {
   return function(number) {
+    number = String(number)
+
     if (number === undefined)
       return null;
+    else if (number.indexOf('.') == -1)
+      return number
 
     var hours_and_minutes = number.split('.')
 
