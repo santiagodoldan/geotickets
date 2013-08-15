@@ -1,35 +1,54 @@
 class TicketsController < ApplicationController
 
+  #
+  #
+  #
   def index
-    if params[:epic_id]
-      @epic    = Epic.find(params[:epic_id])
-      @tickets = @epic.tickets
+    @base = if params[:story_id]
+      Story.find(params[:story_id])
     else
-      @tickets = Ticket.scoped
+      Sprint.find(params[:sprint_id])
     end
+
+    @tickets = @base.tickets
 
     respond_with(@tickets)
   end
 
+  #
+  #
+  #
   def create
-    @ticket = Ticket.new(params[:ticket])
+    @story  = Story.find(params[:story_id])
+    @ticket = @story.tickets.new(params[:ticket])
+
     @ticket.save
 
-    respond_with(@ticket)
+    respond_with(@story, @ticket)
   end
 
+  #
+  #
+  #
   def update
-    @ticket = Ticket.find(params[:id])
+    @story  = Story.find(params[:story_id])
+    @ticket = @story.tickets.find(params[:id])
+
     @ticket.update_attributes(params[:ticket])
 
-    respond_with(@ticket)
+    respond_with(@story, @ticket)
   end
 
+  #
+  #
+  #
   def destroy
-    @ticket = Ticket.find(params[:id])
+    @story  = Story.find(params[:story_id])
+    @ticket = @story.tickets.find(params[:id])
+
     @ticket.destroy
 
-    respond_with(@ticket)
+    respond_with(@story, @ticket)
   end
 
 end

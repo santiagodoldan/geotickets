@@ -1,19 +1,21 @@
-#stories-available
-  %select.input-large{'ui-select2' => true, 'ng-model' => 'story_id', data: {placeholder: 'Select an Story'}}
-    %option
-    %option{'ng-repeat' => 'story in stories', value: '{{story.id}}'}
-      {{story.name}}
+.accordion#stories-accordion{'ng-controller' => 'StoryFormCtrl'}
+  .accordion-group
+    .accordion-heading
+      = form_tag '', class: 'form-inline', name: 'new_story_form' do
+        = text_field_tag :display_name,  nil, class: 'input-xxlarge', 'ng-model' => 'story.display_name',
+                                              placeholder: 'Name', 'ng-required' => true
+        %button.btn.btn-primary{'ng-disabled' => 'new_story_form.$invalid', 'ng-click' => 'submit()'}
+          %span.add-on
+            .icon-plus
 
-  %a.btn.btn-primary{'ng-init' => 'collapsed=true', 'ng-click' => 'collapsed= !collapsed'}
-    %span.add-on
-      %i.icon-plus{'ng-show' => 'collapsed'}
-      %i.icon-minus{'ng-hide' => 'collapsed'}
+%accordion
+  %accordion-group{'ng-repeat' => 'story in stories'}
+    %accordion-heading
+      {{story.display_name}}
 
-  #new-story-wrapper{collapse: 'collapsed'}
-    .well.well-large
-      = render 'templates/stories/form'
+      %button.btn.btn-danger.btn-mini.pull-right{'ng-click' => 'remove($index)'}
+        %span.add-on
+          .icon-minus
 
-#worked-hours
-  %h1 Worked hours
-
-  = render '/templates/worked_hours/worked_hours'
+    .story-tickets
+      = render 'templates/tickets/tickets'

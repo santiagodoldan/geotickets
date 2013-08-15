@@ -1,4 +1,4 @@
-# Inherits from WorkedHoursListCtrl
+# Creation of Worked hours.
 #
 @Geoticket.controller 'WorkedHoursCtrl', ($scope, hours) ->
   $scope.worked_hour = {}

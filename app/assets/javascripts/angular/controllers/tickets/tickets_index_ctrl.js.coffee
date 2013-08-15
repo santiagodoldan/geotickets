@@ -1,9 +1,25 @@
-@Geoticket.controller 'TicketsIndexCtrl', ($scope, $route, EpicTicket, Story) ->
+#
+#
+#
+@Geoticket.controller 'TicketsIndexCtrl', ($scope, Ticket) ->
 
-  $scope.story = Story.get(id: $route.current.params.story_id)
-  $scope.tickets = EpicTicket.query($route.current.params)
+  #
+  #
+  $scope.init = (story_id) ->
+    $scope.story_id = story_id
+    $scope.tickets = Ticket.query({story_id: story_id})
 
-  $scope.addTicket = (ticket) ->
+  #
+  #
+  $scope.add = (ticket) ->
     $scope.tickets[$scope.tickets.length] = ticket
 
-.$inject = ['$scope', '$route', 'EpicTicket', 'Story']
+  #
+  #
+  $scope.remove = (index) ->
+    id = $scope.tickets[index].id
+
+    Ticket.delete {story_id: $scope.story_id, id: id}, ->
+      $scope.tickets.splice(index, 1)
+
+.$inject = ['$scope', 'Ticket']

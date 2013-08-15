@@ -14,13 +14,15 @@
 //= require underscore-min
 //= require jquery_ujs
 //= require select2.min
-//= require jquery.ui.datepicker
 //= require js-routes
 //= require bootstrap
 //= require angular.min
 //= require angular-resource.min
+//= require angular-cookies.min
 //= require angular-ui-select2
 //= require angular-ui-bootstrap
+//= require angular-strap
+//= require bootstrap-datepicker
 //= require date
 //= require app
 //= require_tree ./angular

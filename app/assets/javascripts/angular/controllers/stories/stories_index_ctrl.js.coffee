@@ -1,16 +1,23 @@
-@Geoticket.controller 'StoriesIndexCtrl', ($scope, $location, Story) ->
-  $scope.stories= Story.query()
+#
+#
+#
+@Geoticket.controller 'StoriesIndexCtrl', ($scope, $route, Story, Ticket) ->
+
+  $scope.stories = Story.query($route.current.params)
 
   #
   #
-  $scope.addStory = (story) ->
+  $scope.add = (story) ->
     $scope.stories[$scope.stories.length] = story
 
-  # Observes story_id attr for future changes and redirects
-  #   to the selected story context.
-  #
-  $scope.$watch 'story_id', (_new, _old) ->
-    unless _.isNull(_new) || _.isUndefined(_new) || _.isEmpty(_new)
-      $location.path(Routes.epic_tickets_path(_new))
 
-.$inject = ['$scope', '$location', 'Story']
+  #
+  #
+  #
+  $scope.remove = (index) ->
+    id = $scope.stories[index].id
+
+    Story.delete {sprint_id: $route.current.params.sprint_id, id: id}, ->
+      $scope.stories.splice(index, 1)
+
+.$inject = ['$scope', '$route', 'Story', 'Ticket']

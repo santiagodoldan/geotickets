@@ -3,18 +3,28 @@ Geoticket.config(['$routeProvider', function($routeProvider) {
 
   $routeProvider.
     when('/', {
+      controller: 'SprintsIndexCtrl',
+      templateUrl: '/assets/templates/sprints/index.html'
+    }).
+
+    when('/sprints/:sprint_id', {
+      controller: 'SprintsIndexCtrl',
+      templateUrl: '/assets/templates/sprints/index.html'
+    }).
+
+    when('/sprints/:sprint_id/stories', {
       controller: 'StoriesIndexCtrl',
       templateUrl: '/assets/templates/stories/index.html'
     }).
 
-    when('/epics/:story_id/tickets', {
-      controller: 'TicketsIndexCtrl',
-      templateUrl: '/assets/templates/tickets/index.html'
+    when('/sprints/:sprint_id/tickets', {
+      controller: 'ReportsIndexCtrl',
+      templateUrl: '/assets/templates/reports/index.html'
     }).
 
-    when('/users/:user_id', {
-      controller: 'UsersCtrl',
-      templateUrl: '/assets/templates/users/show.html'
+    when('/login', {
+      controller: 'LoginCtrl',
+      templateUrl: '/assets/templates/users/login.html'
     }).
 
     otherwise({redirectTo: '/'})

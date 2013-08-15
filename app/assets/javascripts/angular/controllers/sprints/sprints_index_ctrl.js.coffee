@@ -1,0 +1,1 @@
+@Geoticket.controller 'SprintsIndexCtrl', ->

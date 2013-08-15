@@ -6,25 +6,14 @@ class ApplicationController < ActionController::Base
 
   before_filter :check_user, :current_user
 
-  layout :select_layout
-
   private
 
   def check_user
-    #raise 'User not logger In' unless cookies[:user_id].present?
+    render file: 'public/401.html', layout: false, status: :unauthorized unless cookies[:user_id].present?
   end
 
   def current_user
-    @current_user ||= User.first
-    #@current_user ||= User.find_by_id(cookies[:user_id])
-  end
-
-  def select_layout
-    if params[:format] == 'angr'
-      false
-    else
-      'application'
-    end
+    @current_user ||= User.find_by_id(cookies[:user_id])
   end
 
 end

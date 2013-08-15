@@ -1,8 +1,19 @@
-#worked-hours-index{'ng-controller' => 'WorkedHourTabCtrl'}
-  
-  #tabs-controller{'ng-controller' => 'WorkedHoursListCtrl'}
-    %tabset{type: "'pills'", vertical: 'true'}
-      %tab{'ng-repeat' => 'tab in tabs', heading: '{{tab.name}}', select: 'changeDay(tab.date)'}
-        #day-wrapper
-          = render 'templates/worked_hours/form'
-          = render 'templates/worked_hours/table'
+#worked-hours-wrapper{'ng-controller' => 'WorkedHourTabCtrl'}
+  %h1.pull-left
+    Worked Hours on:
+
+  .control-group.input-append
+    %input.input-small{type: 'text', 'bs-datepicker' => true, 'ng-model' => 'datepicker',
+                      'data-date-format' => 'dd/mm/yyyy'}
+    %button.btn{data: {toggle: 'datepicker'}}
+      %i.icon-calendar
+
+  .clearfix
+  #worked-hours-index
+    #tabs-controller{'ng-controller' => 'WorkedHoursListCtrl'}
+      %tabset{type: "'pills'", vertical: 'true'}
+        %tab{'ng-repeat' => 'tab in tabs', heading: '{{tab.name}}', select: 'changeDay(tab.date)',
+                                           active: 'tab.active'}
+          #day-wrapper
+            = render 'templates/worked_hours/form'
+            = render 'templates/worked_hours/table'

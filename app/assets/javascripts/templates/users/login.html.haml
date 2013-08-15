@@ -1,0 +1,10 @@
+%h1
+  Quién sos?
+
+%select.input-medium{'ui-select2' => true,
+                     'ng-model' => 'user_id',
+                     'ng-required' => 'true',
+                     data: {placeholder: 'Users'}}
+  %option
+  %option{'ng-repeat' => 'user in users', value: '{{user.id}}'}
+    {{user.name}}

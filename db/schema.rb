@@ -11,33 +11,25 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130723021444) do
+ActiveRecord::Schema.define(:version => 20130810055020) do
 
-  create_table "epics", :force => true do |t|
-    t.string   "name"
+  create_table "sprints", :force => true do |t|
+    t.string   "display_name"
+    t.integer  "status"
     t.date     "start_date"
     t.date     "end_date"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
-    t.boolean  "active"
-    t.string   "system_ticket_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
   end
 
-  create_table "plannings", :force => true do |t|
-    t.float    "hours"
-    t.date     "on"
-    t.integer  "user_id"
-    t.integer  "project_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+  create_table "stories", :force => true do |t|
+    t.string   "display_name"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.integer  "sprint_id"
   end
 
-  create_table "projects", :force => true do |t|
-    t.string   "name"
-    t.text     "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
+  add_index "stories", ["sprint_id"], :name => "index_stories_on_sprint_id"
 
   create_table "tags", :force => true do |t|
     t.string   "name"
@@ -46,18 +38,16 @@ ActiveRecord::Schema.define(:version => 20130723021444) do
   end
 
   create_table "tickets", :force => true do |t|
-    t.string   "name"
+    t.string   "display_name"
     t.integer  "user_id"
-    t.integer  "epic_id"
+    t.integer  "story_id"
     t.text     "description"
-    t.float    "estimation",       :default => 0.0
-    t.float    "todo",             :default => 0.0
-    t.datetime "created_at",                        :null => false
-    t.datetime "updated_at",                        :null => false
-    t.string   "system_ticket_id"
+    t.float    "estimation",   :default => 0.0
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
-  add_index "tickets", ["epic_id"], :name => "index_tickets_on_epic_id"
+  add_index "tickets", ["story_id"], :name => "index_tickets_on_story_id"
   add_index "tickets", ["user_id"], :name => "index_tickets_on_user_id"
 
   create_table "users", :force => true do |t|

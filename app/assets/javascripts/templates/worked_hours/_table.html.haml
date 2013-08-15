@@ -1,7 +1,6 @@
 %table.table.table-bordered
   %thead
     %th Ticket
-    %th Description
     %th Quantity
     %th User
     %th Tag
@@ -9,9 +8,7 @@
   %tbody
     %tr{'ng-repeat' => 'worked_hour in worked_hours'}
       %td
-        {{worked_hour.ticket.name | showValueOrNone}}
-      %td
-        {{worked_hour.description}}
+        {{worked_hour.ticket.display_name | showValueOrNone}}
       %td
         {{worked_hour.amount | hoursAndMinutes}}
       %td
@@ -19,9 +16,6 @@
       %td
         %span.label {{worked_hour.tag.name}}
       %td.span2
-        = link_to '#', class: 'btn btn-mini btn-primary', 'ng-click' => 'edit($index)' do
-          Edit
-          %i.icon-edit
         = link_to '#', class: 'btn btn-mini btn-danger', 'ng-click' => 'remove($index)' do
           Delete
           %i.icon-remove
