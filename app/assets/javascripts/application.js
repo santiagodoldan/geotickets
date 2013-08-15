@@ -11,8 +11,19 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
+//= require underscore-min
 //= require jquery_ujs
-//= require jquery.ui.datepicker
+//= require select2.min
+//= require js-routes
 //= require bootstrap
 //= require angular.min
-//= require underscore-min
+//= require angular-resource.min
+//= require angular-cookies.min
+//= require angular-ui-select2
+//= require angular-ui-bootstrap
+//= require angular-strap
+//= require bootstrap-datepicker
+//= require date
+//= require app
+//= require_tree ./angular
+//= require_tree ./templates

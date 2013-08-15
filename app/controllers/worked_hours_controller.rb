@@ -1,41 +1,29 @@
 class WorkedHoursController < ApplicationController
 
-  def create
-    @worked_hour = current_user.worked_hours.new(params[:worked_hour])
+  def index
+    @worked_hours = current_user.search_worked_hours(params)
 
-    respond_to do |format|
-      if @worked_hour.save
-        format.html { redirect_to root_path, notice: 'La hora se agrego correctamente' }
-        format.json { render json: @worked_hour, status: :created, location: @worked_hour }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @worked_hour.errors, status: :unprocessable_entity }
-      end
-    end
+    respond_with(@worked_hours)
+  end
+
+  def create
+    @worked_hour = current_user.worked_hours.create(params[:worked_hour])
+
+    respond_with(@worked_hour)
   end
 
   def update
     @worked_hour = current_user.worked_hours.find(params[:id])
+    @worked_hour.update_attributes(params[:worked_hour])
 
-    respond_to do |format|
-      if @worked_hour.update_attributes(params[:worked_hour])
-        format.html { redirect_to root_path, notice: 'La hora se actualizo correctamente' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @worked_hour.errors, status: :unprocessable_entity }
-      end
-    end
+    respond_with(@worked_hour)
   end
 
   def destroy
     @worked_hour = current_user.worked_hours.find(params[:id])
     @worked_hour.destroy
 
-    respond_to do |format|
-      format.html { redirect_to root_path }
-      format.json { head :no_content }
-    end
+    respond_with(@worked_hour)
   end
 
 end

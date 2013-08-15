@@ -1,7 +1,5 @@
 class WorkedHour < ActiveRecord::Base
 
-  after_create :update_todo_hours
-
   belongs_to :user
   belongs_to :ticket
   belongs_to :tag
@@ -25,11 +23,8 @@ class WorkedHour < ActiveRecord::Base
 
   end
 
-  def update_todo_hours
-    return true unless self.ticket
-
-    ticket_to_update = self.ticket
-    ticket_to_update.update_attributes(todo: ticket_to_update.todo - self.amount)
+  def as_json(options = {})
+    super(options.merge(include: {ticket: {only: [:display_name]}, tag: {only: :name}, user: {only: [:id, :name]}}))
   end
 
 end

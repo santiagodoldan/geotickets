@@ -9,17 +9,38 @@
     = stylesheet_link_tag "application", :media => "all"
     = javascript_include_tag "application"
     = csrf_meta_tags
-    = yield(:head)
-  %body
+
+  %body{'ng-app' => 'Geoticket', 'ng-controller' => 'SprintContextCtrl'}
     %header.navbar.navbar-fixed-top
       %nav.navbar-inner
         .container
-          = render 'layouts/navigation'
-    #main{:role => "main"}
+          = link_to 'Geo Tickets', '/', class: 'brand'
+
+          #top-menu-buttons-wrapper{'ng-controller' => 'TopMenuCtrl', 'ng-show' => 'authenticated'}
+            %ul.nav
+              %li
+                = link_to 'Stories', '', 'ng-click' => 'redirectToStories()'
+              %li
+                = link_to 'Reports', '', 'ng-click' => 'redirectToReports()'
+
+            %ul.nav.pull-right
+              %li
+                %a{href: '', 'ng-click' => 'logout()'}
+                  %i.icon-signout
+
+            #sprint-context-selector.pull-right
+              %select.input-large{'ui-select2' => true, 'ng-model' => 'sprint.id',
+                                  data: {placeholder: 'Select an Sprint'}}
+                %option
+                %option{'ng-repeat' => 'sprint in sprints', value: '{{sprint.id}}'}
+                  {{sprint.display_name}}
+
+    #main
       .container
         .content
           .row
             .span12
-              = render 'layouts/messages'
-              = yield
+              #angular-js-app
+                #angular-js-wrapper{'ng-view' => true}
+
           %footer

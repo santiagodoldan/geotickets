@@ -1,11 +1,3 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
-
 User.create(name: 'Pablo Ifran', hours_of_work: 8)
 User.create(name: 'Santiago Doldan', hours_of_work: 8)
 User.create(name: 'Sebastian Suttner', hours_of_work: 8)
@@ -19,3 +11,19 @@ Tag.create(name: 'Design')
 Tag.create(name: 'Management')
 Tag.create(name: 'Planning')
 Tag.create(name: 'Review')
+
+sprint_1 = Sprint.create(display_name: 'Sprint 1', status: 1, start_date: 2.weeks.ago, end_date: 1.day.ago)
+
+story_1_1 = Story.create(display_name: 'B-01769 Add sprint model')
+story_1_2 = Story.create(display_name: 'B-01770 Apply css styles')
+
+sprint_1.stories << story_1_1
+sprint_1.stories << story_1_2
+
+sprint_2 = Sprint.create(display_name: 'Sprint 2', status: 0, start_date: Date.today, end_date: 2.weeks.from_now)
+
+story_2_1 = Story.create(display_name: 'B-01788 Create report view')
+story_2_2 = Story.create(display_name: 'B-01790 Apply Sprint context')
+
+sprint_2.stories << story_2_1
+sprint_2.stories << story_2_2

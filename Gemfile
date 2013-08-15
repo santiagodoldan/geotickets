@@ -7,7 +7,6 @@ gem 'rails', '3.2.13'
 
 gem 'mysql2'
 gem 'bootstrap-sass'
-gem 'haml'
 gem 'simple_form'
 gem 'haml-rails'
 gem 'pg'
@@ -25,6 +24,8 @@ group :assets do
   # gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
+  gem 'js-routes'
+  gem 'haml_assets'
 end
 
 gem 'jquery-rails'

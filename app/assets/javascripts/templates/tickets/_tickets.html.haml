@@ -1,0 +1,29 @@
+%table.table.table-bordered{'ng-controller' => 'TicketsIndexCtrl', 'ng-init' => 'init(story.id)'}
+  %thead
+    %tr
+      %th Ticket
+      %th Estimation
+      %th Actions
+    %tr{'ng-controller' => 'TicketFormCtrl'}
+      = form_tag '', class: 'form-inline', name: 'new_ticket_form' do
+        %th
+          = text_field_tag :display_name,  nil, class: 'input-xxlarge', 'ng-model' => 'ticket.display_name',
+                                                placeholder: 'Name', 'ng-required' => true
+        %th
+          = text_field_tag :estimation,  nil, class: 'input-medium', 'ng-model' => 'ticket.estimation',
+                                              placeholder: 'Estimation', 'ng-required' => true
+        %th
+          %button.btn.btn-primary.btn-mini{'ng-disabled' => 'new_ticket_form.$invalid',
+                                           'ng-click' => 'submit()'}
+            %span.add-on
+              .icon-plus
+  %tbody
+    %tr{'ng-repeat' => 'ticket in tickets'}
+      %td
+        {{ticket.display_name | showValueOrNone}}
+      %td
+        {{ticket.estimation | hoursAndMinutes}}
+      %td
+        %button.btn.btn-danger.btn-mini{'ng-click' => 'remove($index)'}
+          %span.add-on
+            .icon-minus

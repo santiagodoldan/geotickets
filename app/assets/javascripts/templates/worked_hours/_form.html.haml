@@ -1,0 +1,40 @@
+#worked-hour-form{'ng-controller' => 'WorkedHoursCtrl'}
+  = form_tag '', class: 'form-inline', name: 'new_worked_hour' do
+    .control-group
+      .controls
+        .input-prepend
+          %span.add-on
+            %i.icon-time
+          = text_field_tag :amount,  nil, class: 'input-mini', placeholder: 'HH:MM',
+                                          'ng-required' => 'true',
+                                          'ng-model' => 'worked_hour.amount'
+      .controls
+        .input-prepend
+          %span.add-on
+            %i.icon-pencil
+          = text_field_tag :description, nil, class: 'input-large', placeholder: 'Description',
+                                              'ng-model' => 'worked_hour.description'
+      .controls
+        %select.input-medium{'ui-select2' => true,
+                             'ng-model' => 'worked_hour.ticket_id',
+                             'ng-required' => 'true',
+                             data: {placeholder: 'Tickets'}}
+          %option
+          %option{'ng-repeat' => 'ticket in tickets', value: '{{ticket.id}}'}
+            {{ticket.display_name}}
+      .controls
+        %select.input-medium{'ui-select2' => true,
+                            'ng-model' => 'worked_hour.tag_id',
+                            'ng-required' => 'true',
+                            data: {placeholder: 'Tags'}}
+          %option
+          %option{'ng-repeat' => 'tag in tags', value: '{{tag.id}}'}
+            {{tag.name}}
+
+      .controls
+        %button{class: 'btn btn-primary', 'ng-click' => 'submit()', 'ng-disabled' => 'new_worked_hour.$invalid'}
+          %span.add-on
+            .icon-plus
+        %button{class: 'btn btn-danger', 'ng-click' => 'clear()'}
+          %span.add-on
+            .icon-refresh
