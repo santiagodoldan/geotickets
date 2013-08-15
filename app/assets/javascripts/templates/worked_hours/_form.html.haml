@@ -15,9 +15,8 @@
           = text_field_tag :description, nil, class: 'input-large', placeholder: 'Description',
                                               'ng-model' => 'worked_hour.description'
       .controls
-        %select.input-medium{'ui-select2' => true,
-                             'ng-model' => 'worked_hour.ticket_id',
-                             'ng-required' => 'true',
+        %select.input-xlarge{'ui-select2' => true,
+                            'ng-model' => 'worked_hour.ticket_id',
                              data: {placeholder: 'Tickets'}}
           %option
           %option{'ng-repeat' => 'ticket in tickets', value: '{{ticket.id}}'}
