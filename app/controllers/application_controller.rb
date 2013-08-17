@@ -4,9 +4,15 @@ class ApplicationController < ActionController::Base
 
   respond_to :json
 
-  before_filter :check_user, :current_user
+  before_filter :check_user, :current_user, :allow_html_on_every_action
 
   private
+
+  # If current request wasn't of JSON type just render the dashboard view.
+  #
+  def allow_html_on_every_action
+    render 'dashboard/index' and return if request.format == 'text/html'
+  end
 
   def check_user
     render file: 'public/401.html', layout: false, status: :unauthorized unless cookies[:user_id].present?

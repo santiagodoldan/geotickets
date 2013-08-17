@@ -1,20 +1,22 @@
 # Manages sprint context changes.
-#   When load for first time it has the active one.
+#   When being at the root page it load the active sprint as default.
 #
 @Geoticket.controller 'SprintContextCtrl', ($scope, $location, Sprint, UserAuth) ->
 
   $scope.authenticated= UserAuth.isAuthenticated()
-
   $scope.sprints= Sprint.query()
+  $scope.sprint= {}
 
-  # TODO find a better solution to retrieve the active sprint at first load.
+  # Look for the active sprint only being at the root page.
   #
-  $scope.sprint= Sprint.get({id: 'non_id', active: true})
+  if $location.path() == '/'
+    $scope.sprint= Sprint.get({id: 'non_id', active: true})
 
-  # Triggered when selected Sprint has changed.
+  # Triggered when other controller has detected that the current
+  #   route is in the context of an existing sprint.
   #
-  $scope.$watch 'sprint.id', (_new, _old) ->
-    $location.path(Routes.sprint_path({id: _new})) if _new
+  $scope.$on 'SET_SPRINT_CONTEXT', (event, id) =>
+    $scope.sprint= Sprint.get({id: id})
 
   # Triggered on every current user status change.
   #
