@@ -7,6 +7,8 @@
             %i.icon-time
           = text_field_tag :amount,  nil, class: 'input-mini', placeholder: 'HH:MM',
                                           'ng-required' => 'true',
+                                          'ng-focus' => 'focus_on_hours',
+                                          'ng-focus-lost' => 'focus_on_hours=false',
                                           'ng-model' => 'worked_hour.amount'
       .controls
         .input-prepend
