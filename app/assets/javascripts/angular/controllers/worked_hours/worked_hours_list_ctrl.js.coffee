@@ -1,6 +1,6 @@
 # Worked hours list and creation.
 #
-@Geoticket.controller 'WorkedHoursListCtrl', ($scope, WorkedHour, SprintTicket, Tag) ->
+@Geoticket.controller 'WorkedHoursListCtrl', ($scope, $timeout, WorkedHour, SprintTicket, Tag) ->
   
   $scope.worked_hours = {}
   $scope.current_date = Date.today()
@@ -32,12 +32,12 @@
       sum + Number(wh.amount)
     , 0
 
-  # Different sprint was selected, must change current context.
+  # Retrieve associated tickets for current sprint.
   #
-  $scope.$watch '$scope.sprint.id', ->
-    if $scope.sprint.id
-      $scope.tickets = SprintTicket.query({sprint_id: $scope.sprint.id})
+  $scope.$watch 'sprint.id', ->
+    $timeout ->
+      $scope.tickets = SprintTicket.query({sprint_id: $scope.sprint.id}) if $scope.sprint.id
 
 # WorkedHoursListCtrl's Dependency Injection
 #
-.$inject = ['$scope', 'WorkedHour', 'SprintTicket', 'Tag']
+.$inject = ['$scope', '$timeout', 'WorkedHour', 'SprintTicket', 'Tag']

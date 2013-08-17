@@ -30,6 +30,7 @@
 
             #sprint-context-selector.pull-right
               %select.input-large{'ui-select2' => true, 'ng-model' => 'sprint.id',
+                                  'ng-change' => 'changeSprint()',
                                   data: {placeholder: 'Select an Sprint'}}
                 %option
                 %option{'ng-repeat' => 'sprint in sprints', value: '{{sprint.id}}'}
