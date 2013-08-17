@@ -27,6 +27,16 @@
       active: day.equals($scope.datepicker)
     }
 
+  # Moves to previous week.
+  #
+  $scope.previousWeek = ->
+    $scope.datepicker = angular.copy($scope.datepicker).add(-8).day()
+
+  # Moves to next week.
+  #
+  $scope.nextWeek = ->
+    $scope.datepicker = angular.copy($scope.datepicker).add(6).day()
+
   # Redraw all tabs and its associated hours when
   #   datepicker changed its date.
   #

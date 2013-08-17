@@ -7,14 +7,11 @@
   # Creates a new WorkedHour and clear previous selections.
   #
   $scope.submit = ->
-    worked_hours = angular.copy($scope.worked_hour)
+    $scope.worked_hour.on= $scope.current_date.toString('yyyy-MM-dd')
+    $scope.worked_hour.amount= hours.convertNumber($scope.worked_hour.amount)
 
+    $scope.new(angular.copy($scope.worked_hour))
     $scope.worked_hour= {}
-
-    worked_hours.on= $scope.current_date.toString('yyyy-MM-dd')
-    worked_hours.amount= hours.convertNumber(worked_hours.amount)
-
-    $scope.new(worked_hours)
 
     # Set the focus on worked hours input to aid the creation of a new hour.
     $scope.focus_on_hours= true

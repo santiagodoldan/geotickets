@@ -2,7 +2,11 @@
   %h1.pull-left
     Worked Hours on:
 
-  .control-group.input-append
+  .control-group.input-append.input-prepend.pull-left
+    %button.btn{'ng-click' => 'previousWeek()'}
+      <
+    %button.btn{'ng-click' => 'nextWeek()'}
+      >
     %input.input-small{type: 'text', 'bs-datepicker' => true, 'ng-model' => 'datepicker',
                       'data-date-format' => 'dd/mm/yyyy'}
     %button.btn{data: {toggle: 'datepicker'}}
