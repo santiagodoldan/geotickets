@@ -17,13 +17,15 @@
 
   # Log in given user.
   #
-  login: (user_id) =>
+  login: (user_id, callback) =>
     $http.post(Routes.login_user_path(user_id)).success (data) =>
       @username= data.name
       @user_id= data.id
       @authenticated= true
 
       $location.path('/')
+
+      callback() if callback
 
   # Log out current user.
   #

@@ -10,10 +10,9 @@
   #
   $scope.$watch 'user_id', ->
     if $scope.user_id
-      UserAuth.login($scope.user_id)
-
-      # Emit to parent's controllers.
-      #
-      $scope.$emit('USER_STATUS', true)
+      UserAuth.login $scope.user_id, ->
+        # Emit to parent's controllers.
+        #
+        $scope.$emit('USER_STATUS', true)
 
 .$inject = ['$scope', '$http', '$location', 'User', 'UserAuth']

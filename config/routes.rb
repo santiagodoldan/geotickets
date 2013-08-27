@@ -2,6 +2,8 @@ GeoTickets::Application.routes.draw do
 
   root to: 'dashboard#index'
 
+  get :login, to: 'dashboard#index'
+
   resources :sprints do
     resources :stories, except: [:new, :edit]
     resources :tickets, only: [:index]
