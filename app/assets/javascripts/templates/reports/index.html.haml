@@ -1,9 +1,23 @@
-%table.table
-  %tr
-    %th Feature
-    %th Developer
-    %th{'ng-repeat' => 'tag in tags'}
-      {{tag.name}}
-    %th Total Invested
-    %th Estimated
-    %th Difference
+%table.table.table-bordered
+  %thead
+    %tr
+      %th Ticket
+      %th{'ng-repeat' => 'tag in tags'}
+        {{tag.name}}
+      %th Used
+      %th Estimated
+  %tbody{'ng-repeat' => 'worked_hour_by_ticket in worked_hours_by_ticket'}
+    %tr{'ng-repeat' => 'worked_hour in worked_hour_by_ticket.worked_hours'}
+      %td{'ng-show' => '$index == 0', rowspan: '{{worked_hour_by_ticket.worked_hours.length}}'}
+        {{worked_hour.ticket.display_name | showValueOrNone}}
+      %td{'ng-repeat' => 'tag in tags'}
+        .badge{'ng-show' => 'worked_hour.tag_id == tag.id', 'bs-tooltip' =>'worked_hour.user.name'}
+          {{worked_hour.amount | hoursAndMinutes}}
+      %td{'ng-show' => '$index == 0', rowspan: '{{worked_hour_by_ticket.worked_hours.length}}'}
+        .badge.badge-important{'ng-show' => 'worked_hour_by_ticket.used > worked_hour_by_ticket.estimated'}
+          {{worked_hour_by_ticket.used | hoursAndMinutes}}
+        .badge.badge-success{'ng-show' => 'worked_hour_by_ticket.used <= worked_hour_by_ticket.estimated'}
+          {{worked_hour_by_ticket.used | hoursAndMinutes}}
+      %td{'ng-show' => '$index == 0', rowspan: '{{worked_hour_by_ticket.worked_hours.length}}'}
+        .badge.badge-warning
+          {{worked_hour_by_ticket.estimated | hoursAndMinutes}}

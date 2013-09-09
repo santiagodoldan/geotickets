@@ -24,7 +24,14 @@ class WorkedHour < ActiveRecord::Base
   end
 
   def as_json(options = {})
-    super(options.merge(include: {ticket: {only: [:display_name]}, tag: {only: :name}, user: {only: [:id, :name]}}))
+    super(options.merge(
+        include: {
+          ticket: {only: [:display_name, :estimation]},
+          tag: {only: :name},
+          user: {only: [:id, :name]}
+        }
+      )
+    )
   end
 
 end

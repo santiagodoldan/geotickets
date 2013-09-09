@@ -4,6 +4,7 @@ class Sprint < ActiveRecord::Base
 
   has_many :stories
   has_many :tickets, through: :stories
+  has_many :worked_hours, through: :tickets
 
   scope :active, -> { where(status: STATUS[:active]) }
 
