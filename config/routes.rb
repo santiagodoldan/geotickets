@@ -5,6 +5,8 @@ GeoTickets::Application.routes.draw do
   get :login, to: 'dashboard#index'
 
   resources :sprints do
+    get :active, on: :collection
+
     resources :stories, except: [:new, :edit]
     resources :tickets, only: [:index]
     resources :worked_hours, only: [:index]

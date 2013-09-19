@@ -20,7 +20,7 @@
     #   the selector and it won't appear.
     #
     $scope.sprints= Sprint.query ->
-      $scope.sprint= Sprint.get({id: 'non_id', active: true})
+      $scope.sprint= Sprint.active()
 
   # Triggered when selected Sprint has changed.
   #

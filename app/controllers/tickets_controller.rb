@@ -1,54 +1,55 @@
 class TicketsController < ApplicationController
 
+  before_filter :preload_tickets, only: [:index]
+
+  load_and_authorize_resource
+
+  # Lists all the tickets for current context.
   #
-  #
-  #
+  # GET /stories/:story_id/tickets
+  # GET /sprints/:sprint_id/tickets
   def index
-    @base = if params[:story_id]
-      Story.find(params[:story_id])
-    else
-      Sprint.find(params[:sprint_id])
-    end
-
-    @tickets = @base.tickets
-
     respond_with(@tickets)
   end
 
+  # Creates a new ticket with given data.
   #
-  #
-  #
+  # POST /stories/:story_id/tickets
   def create
-    @story  = Story.find(params[:story_id])
-    @ticket = @story.tickets.new(params[:ticket])
-
     @ticket.save
 
     respond_with(@story, @ticket)
   end
 
+  # Updates given ticket with given data.
   #
-  #
-  #
+  # PUT /stories/:story_id/tickets
   def update
-    @story  = Story.find(params[:story_id])
-    @ticket = @story.tickets.find(params[:id])
-
     @ticket.update_attributes(params[:ticket])
 
     respond_with(@story, @ticket)
   end
 
+  # Destroys given ticket.
   #
-  #
-  #
+  # DELETE /stories/:story_id/tickets/:id
   def destroy
-    @story  = Story.find(params[:story_id])
-    @ticket = @story.tickets.find(params[:id])
-
     @ticket.destroy
 
     respond_with(@story, @ticket)
+  end
+
+  private
+
+  # Returns tickets for current context.
+  #
+  # @return [ActiveRecord::Relation<Ticket>]
+  def preload_tickets
+    @tickets = if params[:story_id]
+      Story.find(params[:story_id]).tickets
+    else
+      Sprint.find(params[:sprint_id]).tickets
+    end
   end
 
 end
