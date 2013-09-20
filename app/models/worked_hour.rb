@@ -1,4 +1,5 @@
 class WorkedHour < ActiveRecord::Base
+  include SharedConcerns::FengWorkHours
 
   belongs_to :user
   belongs_to :ticket
