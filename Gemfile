@@ -10,6 +10,7 @@ gem 'bootstrap-sass'
 gem 'simple_form'
 gem 'haml-rails'
 gem 'pg'
+gem 'cancan'
 
 gem 'rest-client'
 

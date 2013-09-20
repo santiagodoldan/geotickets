@@ -1,7 +1,9 @@
 class UsersController < ApplicationController
 
   # Skip authentication until using device
+  #
   skip_before_filter :check_user
+  skip_authorization_check
 
   def index
     @users = User.all
