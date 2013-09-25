@@ -13,22 +13,6 @@
 
 ActiveRecord::Schema.define(:version => 20130916170855) do
 
-  create_table "plannings", :force => true do |t|
-    t.float    "hours"
-    t.date     "on"
-    t.integer  "user_id"
-    t.integer  "project_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "projects", :force => true do |t|
-    t.string   "name"
-    t.text     "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-  end
-
   create_table "sprints", :force => true do |t|
     t.string   "display_name"
     t.integer  "status"

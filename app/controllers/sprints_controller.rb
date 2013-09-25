@@ -6,6 +6,12 @@ class SprintsController < ApplicationController
   #
   # GET /sprints
   def index
+    # TODO: move this logic out of the controller.
+    #
+    if params[:limit] && params[:order]
+      @sprints = @sprints.order("created_at #{params[:order]}").limit(params[:limit])
+    end
+
     respond_with(@sprints)
   end
 

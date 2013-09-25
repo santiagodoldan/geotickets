@@ -11,6 +11,7 @@
 // GO AFTER THE REQUIRES BELOW.
 //
 //= require jquery
+//= require jquery-ui-1.10.3.min
 //= require underscore-min
 //= require jquery_ujs
 //= require select2.min
@@ -18,7 +19,9 @@
 //= require bootstrap
 //= require angular.min
 //= require angular-resource.min
+//= require angular-route.min
 //= require angular-cookies.min
+//= require angular-dragdrop.min
 //= require angular-ui-select2
 //= require angular-ui-bootstrap
 //= require angular-strap

@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-  include SharedConcerns::Fengable
+  #include SharedConcerns::Fengable
 
   attr_accessible :name, :hours_of_work
 

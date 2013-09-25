@@ -2,7 +2,10 @@ class TicketsController < ApplicationController
 
   before_filter :preload_tickets, only: [:index]
 
-  load_and_authorize_resource
+  load_and_authorize_resource only: :index
+
+  load_and_authorize_resource :story, except: :index
+  load_and_authorize_resource :ticket, through: :story, except: :index
 
   # Lists all the tickets for current context.
   #

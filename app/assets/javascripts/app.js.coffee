@@ -11,7 +11,13 @@
 #   ui.bootstrap
 #     provides bootstrap components as angular directives.
 #
-@Geoticket = angular.module('Geoticket', ['ngResource', 'ngCookies', 'ui.select2', 'ui.bootstrap', '$strap.directives'])
+@Geoticket = angular.module('Geoticket', ['ngResource',
+                                          'ngRoute',
+                                          'ngCookies',
+                                          'ngDragDrop',
+                                          'ui.select2',
+                                          'ui.bootstrap',
+                                          '$strap.directives'])
 
 # Allows HTML5 history enabled if possible otherwise
 #   would use hashbang behaviour.

@@ -12,6 +12,11 @@
   $scope.redirectToReports = ->
     $location.path(Routes.sprint_tickets_path($scope.sprint.id))
 
+  # Redirects to the sprints page.
+  #
+  $scope.redirectToSprints = ->
+    $location.path(Routes.sprints_path())
+
   # Logs out current user and redirects to the login page.
   #
   $scope.logout = ->

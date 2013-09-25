@@ -2,7 +2,7 @@ class WorkedHoursController < ApplicationController
 
   before_filter :preload_worked_hours, only: [:index]
 
-  load_and_authorize_resource
+  load_and_authorize_resource through: :current_user
 
   # Lists all the worked hours for current user or if having
   #   an specific sprint context only the worked hours for that srint.
@@ -10,6 +10,10 @@ class WorkedHoursController < ApplicationController
   # GET /worked_hours
   # GET /sprints/:sprint_id/worked_hours
   def index
+    if params[:on]
+      @worked_hours = @worked_hours.search(on_eq: params[:on]).result
+    end
+
     respond_with(@worked_hours)
   end
 

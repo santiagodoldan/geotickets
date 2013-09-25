@@ -23,6 +23,7 @@
   #
   $scope.changeDay = (date) ->
     $scope.current_date = date
+
     $scope.worked_hours = WorkedHour.query({on: date})
 
   # Returns the sum of each worked hour amount.

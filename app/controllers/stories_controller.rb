@@ -14,7 +14,7 @@ class StoriesController < ApplicationController
   #
   # GET /sprints/:sprint_id/stories/:id
   def show
-    respond_with(@story)
+    respond_with(@sprint, @story)
   end
 
   # Creates a new story for given sprint.
@@ -23,7 +23,7 @@ class StoriesController < ApplicationController
   def create
     @story.save
 
-    respond_with(@story)
+    respond_with(@sprint, @story)
   end
 
   # Updates given story.
@@ -32,7 +32,7 @@ class StoriesController < ApplicationController
   def update
     @story.update_attributes(params[:story])
 
-    respond_with(@story)
+    respond_with(@sprint, @story)
   end
 
   # Destroys given story.
@@ -41,7 +41,7 @@ class StoriesController < ApplicationController
   def destroy
     @story.destroy
 
-    respond_with(@story)
+    respond_with(@sprint, @story)
   end
 
 end

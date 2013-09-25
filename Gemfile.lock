@@ -75,6 +75,8 @@ GEM
     multi_json (1.7.6)
     mysql2 (0.3.11)
     pg (0.15.1)
+    polyamorous (0.6.4)
+      activerecord (>= 3.0)
     polyglot (0.3.3)
     rack (1.4.5)
     rack-cache (1.2)
@@ -100,6 +102,10 @@ GEM
       thor (>= 0.14.6, < 2.0)
     raindrops (0.11.0)
     rake (10.0.4)
+    ransack (1.0.0)
+      actionpack (>= 3.0)
+      activerecord (>= 3.0)
+      polyamorous (~> 0.6.0)
     rdoc (3.12.2)
       json (~> 1.4)
     rest-client (1.6.7)
@@ -147,6 +153,7 @@ DEPENDENCIES
   mysql2
   pg
   rails (= 3.2.13)
+  ransack
   rest-client
   sass-rails (~> 3.2.3)
   simple_form

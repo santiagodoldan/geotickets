@@ -11,6 +11,10 @@
       controller: 'SprintsIndexCtrl',
       templateUrl: '/assets/templates/sprints/index.html'
 
+    .when '/sprints',
+      controller: 'SprintsManagementCtrl',
+      templateUrl: '/assets/templates/sprints/stories_management.html'
+
     .when '/sprints/:sprint_id/stories',
       controller: 'StoriesIndexCtrl'
       templateUrl: '/assets/templates/stories/index.html'

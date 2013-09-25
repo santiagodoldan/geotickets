@@ -11,6 +11,7 @@ gem 'simple_form'
 gem 'haml-rails'
 gem 'pg'
 gem 'cancan'
+gem 'ransack'
 
 gem 'rest-client'
 

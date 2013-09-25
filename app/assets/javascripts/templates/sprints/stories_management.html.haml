@@ -1,0 +1,21 @@
+#stories-management
+  .current-top-button-wrapper.pull-right
+    = link_to 'Apply Changes', '', 'ng-click' => 'applyChanges()', 'class' => 'btn btn-success'
+
+  .clearfix
+  %ul.thumbnails
+    %li.span6{'ng-repeat'        => 'sprint in sprints_with_stories',
+              'ng-model'         => 'sprint.stories',
+              'data-drop'        => 'true',
+              'jqyoui-droppable' => '{multiple:true}'}
+
+      .thumbnail.stories
+        %h4
+          {{sprint.display_name}}
+        .caption
+          .btn{'ng-repeat'           => 'story in sprint.stories',
+               'ng-model'            => 'sprint.stories',
+               'data-drag'           => 'true',
+               'data-jqyoui-options' => '{revert: true}',
+               'jqyoui-draggable'    => "{index: {{$index}}}"}
+            {{story.display_name}}

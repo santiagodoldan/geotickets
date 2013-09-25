@@ -3,7 +3,7 @@
 #
 @Geoticket.factory 'WorkedHour', ($resource) ->
 
-  $resource(Routes.worked_hour_path(':id'), {id: '@id'})
+  $resource(Routes.worked_hour_path(':id', format: 'json'), {id: '@id'})
 
 .$inject = ['$resource']
 
@@ -12,6 +12,6 @@
 #
 @Geoticket.factory 'SprintWorkedHour', ($resource) ->
 
-  $resource(Routes.sprint_worked_hours_path(':sprint_id'))
+  $resource(Routes.sprint_worked_hours_path(':sprint_id', format: 'json'))
 
 .inject = ['$resource']
