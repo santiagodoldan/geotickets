@@ -1,5 +1,10 @@
 class Ticket < ActiveRecord::Base
 
+  # Avoid destroying tickets with worked hours associated.
+  #   When a ticket must be deleted all its worked hours should be deleted before.
+  #
+  before_destroy :prevent_destroy_with_wh
+
   belongs_to :user
   belongs_to :story
 
@@ -10,19 +15,14 @@ class Ticket < ActiveRecord::Base
 
   attr_accessible :display_name, :estimation
 
-  #
-  #
-  #
-  def as_json(options)
-    super(options.merge({includes: :total_hours_by_tag}))
-  end
+  private
 
+  # Returns true if current ticket has no worked hours associated
+  #   otherwise returns false.
   #
-  #
-  #
-  def total_hours_by_tag
-    hours_by_tag = worked_hours.includes(:tag).group('tags.id').sum(:amount)
-    hours_by_tag.merge(total: hours_by_tag.values.sum)
+  # @return [Boolean]
+  def prevent_destroy_with_wh
+    return self.worked_hours.empty?
   end
 
 end

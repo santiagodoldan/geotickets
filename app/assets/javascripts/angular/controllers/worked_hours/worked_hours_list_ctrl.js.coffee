@@ -1,6 +1,6 @@
 # Worked hours list and creation.
 #
-@Geoticket.controller 'WorkedHoursListCtrl', ($scope, $timeout, WorkedHour, SprintTicket, Tag) ->
+@Geoticket.controller 'WorkedHoursListCtrl', ($scope, $timeout, hours, WorkedHour, SprintTicket, Tag) ->
   
   $scope.worked_hours = {}
   $scope.current_date = Date.today()
@@ -19,6 +19,15 @@
     WorkedHour.remove({id: id})
     $scope.worked_hours.splice(index, 1)
 
+  # Update selected row.
+  #
+  $scope.update = (index) ->
+    worked_hour = $scope.worked_hours[index]
+    worked_hour.amount= hours.convertNumber(String(worked_hour.amount))
+    worked_hour.editing= false
+
+    worked_hour.$update()
+
   # Verticals days changed.
   #
   $scope.changeDay = (date) ->
@@ -30,7 +39,7 @@
   #
   $scope.sumHours = ->
     _.reduce $scope.worked_hours, (sum, wh) ->
-      sum + Number(wh.amount)
+      sum + Number(hours.convertNumber(String(wh.amount)))
     , 0
 
   # Retrieve associated tickets for current sprint.
@@ -41,4 +50,4 @@
 
 # WorkedHoursListCtrl's Dependency Injection
 #
-.$inject = ['$scope', '$timeout', 'WorkedHour', 'SprintTicket', 'Tag']
+.$inject = ['$scope', '$timeout', 'hours', 'WorkedHour', 'SprintTicket', 'Tag']

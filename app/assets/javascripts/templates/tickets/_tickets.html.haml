@@ -20,10 +20,22 @@
   %tbody
     %tr{'ng-repeat' => 'ticket in tickets'}
       %td
-        {{ticket.display_name | showValueOrNone}}
+        .non-editable{'ng-hide' => 'ticket.editing'}
+          {{ticket.display_name | showValueOrNone}}
+        .editable{'ng-show' => 'ticket.editing'}
+          %input.input-xxlarge{'ng-model' => 'ticket.display_name'}
       %td
-        {{ticket.estimation | hoursAndMinutes}}
+        .non-editable{'ng-hide' => 'ticket.editing'}
+          {{ticket.estimation | hoursAndMinutes}}
+        .editable{'ng-show' => 'ticket.editing'}
+          %input.input-medium{'ng-model' => 'ticket.estimation'}
       %td
-        %button.btn.btn-danger.btn-mini{'ng-click' => 'remove($index)'}
-          %span.add-on
-            .icon-minus
+        .non-editable{'ng-hide' => 'ticket.editing'}
+          = link_to '#', class: 'btn btn-mini btn-primary', 'ng-click' => 'ticket.editing=true;' do
+            %i.icon-edit
+          = link_to '#', class: 'btn btn-mini btn-danger', 'ng-click' => 'remove($index)' do
+            %i.icon-remove
+
+        .editable{'ng-show' => 'ticket.editing'}
+          = link_to '#', class: 'btn btn-mini btn-primary', 'ng-click' => 'update($index)' do
+            %i.icon-ok

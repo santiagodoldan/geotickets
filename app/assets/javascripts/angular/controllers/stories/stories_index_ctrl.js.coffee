@@ -12,7 +12,6 @@
   $scope.add = (story) ->
     $scope.stories[$scope.stories.length] = story
 
-
   # Remove given story.
   #
   $scope.remove = (index) ->

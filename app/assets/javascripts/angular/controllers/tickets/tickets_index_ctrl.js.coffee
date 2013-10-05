@@ -1,6 +1,6 @@
 # List of all tickets availables for current sprint.
 #
-@Geoticket.controller 'TicketsIndexCtrl', ($scope, Ticket) ->
+@Geoticket.controller 'TicketsIndexCtrl', ($scope, hours, Ticket) ->
 
   # Look for tickets for given story.
   #
@@ -21,4 +21,13 @@
     Ticket.delete {story_id: $scope.story_id, id: id}, ->
       $scope.tickets.splice(index, 1)
 
-.$inject = ['$scope', 'Ticket']
+  # Updates given ticket.
+  #
+  $scope.update = (index) ->
+    ticket = $scope.tickets[index]
+    ticket.estimation= hours.convertNumber(String(ticket.estimation))
+    ticket.editing= false
+
+    ticket.$update()
+
+.$inject = ['$scope', 'hours', 'Ticket']

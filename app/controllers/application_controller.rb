@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
   # If current request wasn't of JSON type just render the dashboard view.
   #
   def allow_html_on_every_action
-    render 'dashboard/index' and return if params[:format] == 'html'
+    render 'dashboard/index' and return if params[:format] != 'json'
   end
 
   def check_user
