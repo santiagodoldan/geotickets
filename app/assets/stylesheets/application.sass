@@ -46,6 +46,20 @@
   margin-top: 5px
 
 table
+  &.without-marging
+    margin: 0
+  td
+    &.without-padding
+      padding: 0 !important
   th
     input
       margin: 0 !important
+
+  th, td
+    &.tag-hours
+      width: 5%
+    &.estimations
+      width: 10%
+    &.display_name
+      word-break: break-word
+      width: 30%

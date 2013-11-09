@@ -1,23 +1,66 @@
-%table.table.table-bordered
+%h2 Sprint
+
+%table.table.table-bordered{style: 'width: 100%'}
   %thead
     %tr
-      %th Ticket
-      %th{'ng-repeat' => 'tag in tags'}
-        {{tag.name}}
-      %th Used
-      %th Estimated
-  %tbody{'ng-repeat' => 'worked_hour_by_ticket in worked_hours_by_ticket'}
-    %tr{'ng-repeat' => 'worked_hour in worked_hour_by_ticket.worked_hours'}
-      %td{'ng-show' => '$index == 0', rowspan: '{{worked_hour_by_ticket.worked_hours.length}}'}
-        {{worked_hour.ticket.display_name | showValueOrNone}}
-      %td{'ng-repeat' => 'tag in tags'}
-        .badge{'ng-show' => 'worked_hour.tag_id == tag.id', 'bs-tooltip' =>'worked_hour.user.name'}
-          {{worked_hour.amount | hoursAndMinutes}}
-      %td{'ng-show' => '$index == 0', rowspan: '{{worked_hour_by_ticket.worked_hours.length}}'}
-        .badge.badge-important{'ng-show' => 'worked_hour_by_ticket.used > worked_hour_by_ticket.estimated'}
-          {{worked_hour_by_ticket.used | hoursAndMinutes}}
-        .badge.badge-success{'ng-show' => 'worked_hour_by_ticket.used <= worked_hour_by_ticket.estimated'}
-          {{worked_hour_by_ticket.used | hoursAndMinutes}}
-      %td{'ng-show' => '$index == 0', rowspan: '{{worked_hour_by_ticket.worked_hours.length}}'}
-        .badge.badge-warning
-          {{worked_hour_by_ticket.estimated | hoursAndMinutes}}
+      %th.display_name
+        Name
+      %th.tag-hours{'ng-repeat' => 'tag in tags'}
+        {{tag.name | firstLetters}}
+      %th.estimations
+        Used
+      %th.estimations
+        Estimated
+  %tbody
+    %tr
+      %th.display_name
+        {{sprint.display_name}}
+      %th.tag-hours{'ng-repeat' => 'tag in tags'}
+        {{(sprint.total_hours[tag.id] || 0) | hoursAndMinutes}}
+      %th.estimations
+        {{sprint.total_hours['total'] | hoursAndMinutes}}
+      %th.estimations
+
+%h2 Stories
+
+%table.table.table-bordered{style: 'width: 100%'}
+  %thead
+    %tr
+      %th.display_name
+        Name
+      %th.tag-hours{'ng-repeat' => 'tag in tags'}
+        {{tag.name | firstLetters}}
+      %th.estimations
+        Used
+      %th.estimations
+        Estimated
+  %tbody{'ng-repeat' => 'story in sprint.stories'}
+    %tr.info
+      %td.display_name{title: '{{story.display_name}}'}
+        {{story.display_name}}
+      %td.tag-hours{'ng-repeat' => 'tag in tags'}
+        {{(story.total_hours[tag.id] || 0) | hoursAndMinutes}}
+      %td.estimations
+        {{story.total_hours['total'] | hoursAndMinutes}}
+      %td.estimations
+        {{story.estimation | hoursAndMinutes}}
+    %tr
+      %td.without-padding{colspan: '{{tags.length + 3}}'}
+        %table.table.without-marging{style: 'width: 100%'}
+          %tbody{'ng-repeat' => 'ticket in story.tickets'}
+            %tr.success
+              %td.display_name{title: '{{ticket.display_name}}'}
+                {{ticket.display_name}}
+              %td.tag-hours{'ng-repeat' => 'tag in tags'}
+                {{(ticket.total_hours[tag.id] || 0) | hoursAndMinutes}}
+              %td.estimations
+                {{ticket.total_hours['total'] | hoursAndMinutes}}
+              %td.estimations
+                {{ticket.estimation | hoursAndMinutes}}
+            %tr{'ng-repeat' => 'worked_hour in ticket.worked_hours'}
+              %td.display_name
+                {{worked_hour.user_name}}
+              %td.tag-hours{'ng-repeat' => 'tag in tags'}
+                {{(worked_hour.tags[tag.id] || 0) | hoursAndMinutes | showHoursIfPresent}}
+              %td.estimations
+              %td.estimations

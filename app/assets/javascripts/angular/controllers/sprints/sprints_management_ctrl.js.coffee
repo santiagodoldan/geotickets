@@ -1,6 +1,7 @@
 @Geoticket.controller 'SprintsManagementCtrl', ($scope, Sprint, Story) ->
 
   $scope.sprints_with_stories = {}
+  $scope.sprint = {}
 
   # Query for last 2 sprints and its associated stories.
   #
@@ -24,5 +25,14 @@
           story.sprint_id = Number(sprint_id)
 
           Story.update({sprint_id: old_story_id, id: story.id}, story)
+
+  # Creates a new sprint as the new Active one.
+  #
+  $scope.submit = ->
+    $scope.sprint.status = 0
+
+    Sprint.save $scope.sprint, (sprint) ->
+      $scope.sprints.push(sprint)
+      $scope.sprint = {}
 
 .$inject = ['$scope', 'Sprint', 'Story']

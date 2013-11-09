@@ -19,7 +19,7 @@
       controller: 'StoriesIndexCtrl'
       templateUrl: '/assets/templates/stories/index.html'
 
-    .when '/sprints/:sprint_id/tickets',
+    .when '/sprints/:sprint_id/reports',
       controller: 'ReportsIndexCtrl'
       templateUrl: '/assets/templates/reports/index.html'
 

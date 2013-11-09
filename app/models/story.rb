@@ -12,9 +12,36 @@ class Story < ActiveRecord::Base
 
   attr_accessible :display_name, :sprint_id
 
-  # Returns the sum of ticket's estimation.
+  class << self
+
+    def to_report
+      scoped.includes(:tickets).map do |story|
+        {
+          display_name: story.display_name,
+          estimation:   story.total_estimation,
+          total_hours:  story.total_hours_by_tag,
+          tickets:      story.tickets.to_report
+        }
+      end
+    end
+
+  end
+
   #
-  # @return [Integer]
+  #
+  #
+  def as_json(options)
+    super(options.merge({includes: :tickets, methods: :total_hours_by_tag}))
+  end
+
+  #
+  #
+  #
+  def total_hours_by_tag
+    hours_by_tag = worked_hours.includes(:tag).group('tags.id').sum(:amount)
+    hours_by_tag.merge(total: hours_by_tag.values.sum)
+  end
+
   def total_estimation
     tickets.sum(&:estimation)
   end

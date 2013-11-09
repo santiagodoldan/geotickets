@@ -1,3 +1,30 @@
+#sprint-board
+  = form_tag '', class: 'form-inline', name: 'new_sprint' do
+    .control-group
+      .controls
+        .input-prepend
+          %span.add-on
+            %i.icon-pencil
+          = text_field_tag :name, nil, class: 'input-large', placeholder: 'Name',
+                                              'ng-model' => 'sprint.display_name',
+                                              'ng-required' => 'true'
+      .controls
+        .input-prepend
+          %span.add-on
+            %i.icon-calendar
+          %input.input-small{type: 'text', placeholder: 'Start date', 'bs-datepicker' => true, 'ng-model' => 'sprint.start_date', 'data-date-  format' => 'dd/mm/yyyy', 'ng-required' => 'true' }
+
+      .controls
+        .input-prepend
+          %span.add-on
+            %i.icon-calendar
+          %input.input-small{type: 'text', placeholder: 'End date', 'bs-datepicker' => true, 'ng-model' => 'sprint.end_date', 'data-date-format' => 'dd/mm/yyyy', 'ng-required' => 'true'}
+
+      .controls
+        %button{class: 'btn btn-primary', 'ng-click' => 'submit()', 'ng-disabled' => 'new_sprint.$invalid'}
+          %span.add-on
+            .icon-plus
+
 #stories-management
   .current-top-button-wrapper.pull-right
     = link_to 'Apply Changes', '', 'ng-click' => 'applyChanges()', 'class' => 'btn btn-success'

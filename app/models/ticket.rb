@@ -15,7 +15,35 @@ class Ticket < ActiveRecord::Base
 
   attr_accessible :display_name, :estimation
 
-  private
+  class << self
+
+    def to_report
+      scoped.includes(:worked_hours).map do |ticket|
+        {
+          display_name: ticket.display_name,
+          estimation:   ticket.estimation,
+          total_hours:  ticket.total_hours_by_tag,
+          worked_hours: ticket.worked_hours.to_report
+        }
+      end
+    end
+
+  end
+
+  def total_hours_by_tag
+    hours_by_tag = worked_hours.includes(:tag).group('tags.id').sum(:amount)
+    hours_by_tag.merge(total: hours_by_tag.values.sum)
+  end
+
+  def worked_hours_by_user_and_tag
+    worked_hours.grouped_by_user_and_tag.map do |worked_hour|
+      {
+        user_id: worked_hour.user_id,
+        tag_id: worked_hour.tag_id,
+        amount: worked_hour.total
+      }
+    end
+  end
 
   # Returns true if current ticket has no worked hours associated
   #   otherwise returns false.

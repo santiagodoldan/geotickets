@@ -10,7 +10,10 @@
   # Redirects to the reports page.
   #
   $scope.redirectToReports = ->
-    $location.path(Routes.sprint_tickets_path($scope.sprint.id))
+    $location.path(Routes.sprint_reports_path($scope.sprint.id))
+
+  $scope.redirectToSprints = ->
+    $location.path(Routes.sprints_path())
 
   # Redirects to the sprints page.
   #

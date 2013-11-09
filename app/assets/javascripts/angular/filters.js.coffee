@@ -2,7 +2,6 @@
 # If given value is null or undefined it returns 'None'
 #
 @Geoticket.filter 'showValueOrNone', ->
-
   (value) ->
     if (_.isNull(value) || _.isUndefined(value)) then 'None' else value
 
@@ -33,3 +32,19 @@
       minutes = "0" + minutes if (minutes.length == 1)
 
       hours_and_minutes[0] + ":" + minutes
+
+# Returns the first 3 letters from given string.
+#
+#
+@Geoticket.filter 'firstLetters', ->
+  (value, numberOfLetters) ->
+    numberOfLetters = numberOfLetters || 3
+
+    value.substring(0, numberOfLetters)
+
+# Returns given value if different than '0:00'.
+#
+@Geoticket.filter 'showHoursIfPresent', ->
+  (value) ->
+    if value != '0:00'
+      value

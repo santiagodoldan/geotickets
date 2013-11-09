@@ -7,6 +7,10 @@ GeoTickets::Application.routes.draw do
   resources :sprints do
     get :active, on: :collection
 
+    resources :reports do
+      get :breakdown, on: :collection
+    end
+
     resources :stories, except: [:new, :edit]
     resources :tickets, only: [:index]
     resources :worked_hours, only: [:index]
