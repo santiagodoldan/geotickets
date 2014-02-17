@@ -1,27 +1,51 @@
 %td
-  {{worked_hour.ticket.display_name | showValueOrNone}}
+  .non-editable{'ng-hide' => 'worked_hour.editing'}
+    {{worked_hour.ticket.display_name | showValueOrNone}}
+  .editable{'ng-show' => 'worked_hour.editing'}
+    %select.input-xlarge{'ui-select2' => true,
+                        'ng-model' => 'worked_hour.ticket_id',
+                         data: {placeholder: 'Tickets'}}
+      %option
+      %option{'ng-repeat' => 'ticket in tickets', value: '{{ticket.id}}'}
+        {{ticket.display_name}}
 %td
   .non-editable{'ng-hide' => 'worked_hour.editing'}
     {{worked_hour.description | showValueOrNone}}
   .editable{'ng-show' => 'worked_hour.editing'}
-    %input.input-large{'ng-model' => 'worked_hour.description'}
+    %input.input-large{type: 'text', 'ng-model' => 'worked_hour.description'}
 %td
   .non-editable{'ng-hide' => 'worked_hour.editing'}
     {{worked_hour.amount | hoursAndMinutes}}
   .editable{'ng-show' => 'worked_hour.editing'}
-    %input.input-mini{'ng-model' => 'worked_hour.amount'}
+    %input.input-mini{type: 'text', 'ng-model' => 'worked_hour.amount'}
 %td
   {{worked_hour.user.name}}
 %td
-  %span.label {{worked_hour.tag.name}}
-%td
   .non-editable{'ng-hide' => 'worked_hour.editing'}
+    %span.label {{worked_hour.tag.name}}
+  .editable{'ng-show' => 'worked_hour.editing'}
+    %select.input-medium{'ui-select2' => true,
+                        'ng-model' => 'worked_hour.tag_id',
+                        'ng-required' => 'true',
+                        data: {placeholder: 'Tags'}}
+      %option
+      %option{'ng-repeat' => 'tag in tags', value: '{{tag.id}}'}
+        {{tag.name}}
+%td
+  .non-editable{'ng-hide' => 'worked_hour.editing || worked_hour.processing'}
     = link_to '#', class: 'btn btn-mini btn-primary', 'ng-click' => 'worked_hour.editing=true;' do
       %i.icon-edit
 
     = link_to '#', class: 'btn btn-mini btn-danger', 'ng-click' => 'remove($index)' do
       %i.icon-remove
 
+  .process{'ng-show' => 'worked_hour.processing'}
+    = link_to '#', class: 'btn btn-mini' do
+      %i.icon-refresh.icon-spin
+
   .editable{'ng-show' => 'worked_hour.editing'}
     = link_to '#', class: 'btn btn-mini btn-primary', 'ng-click' => 'update($index)' do
       %i.icon-ok
+
+    = link_to '#', class: 'btn btn-mini btn-danger', 'ng-click' => 'worked_hour.editing=false;' do
+      %i.icon-remove

@@ -11,6 +11,7 @@
   #
   $scope.new = (workedHour) ->
     $scope.worked_hours[$scope.worked_hours.length] = WorkedHour.save(workedHour)
+    $scope.$emit('refresh_tab')
 
   # Remove selected row.
   #
@@ -19,6 +20,7 @@
 
     WorkedHour.remove({id: id})
     $scope.worked_hours.splice(index, 1)
+    $scope.$emit('refresh_tab')
 
   # Update selected row.
   #
@@ -26,8 +28,13 @@
     worked_hour = $scope.worked_hours[index]
     worked_hour.amount= hours.convertNumber(String(worked_hour.amount))
     worked_hour.editing= false
+    worked_hour.processing= true
 
-    worked_hour.$update()
+    worked_hour.$update ->
+      WorkedHour.get {id: worked_hour.id}, (new_worked_hour) ->
+        worked_hour.processing= false
+        $scope.worked_hours[index] = new_worked_hour
+        $scope.$emit('refresh_tab')
 
   # Verticals days changed.
   #

@@ -22,6 +22,11 @@ class WorkedHoursController < ApplicationController
     respond_with(@worked_hours)
   end
 
+  # GET /worked_hours/:id
+  def show
+    respond_with(@worked_hour)
+  end
+
   # Creates given worked hour.
   #
   # POST /worked_hours
@@ -47,6 +52,15 @@ class WorkedHoursController < ApplicationController
     @worked_hour.destroy
 
     respond_with(@worked_hour)
+  end
+
+  # GET /worked_hours/hours_by_day
+  def hours_by_day
+    @amount = @worked_hours.search(on_eq: params[:on]).result.pluck(:amount).sum
+
+    respond_with do |format|
+      format.json { render json: {amount: @amount} }
+    end
   end
 
   private

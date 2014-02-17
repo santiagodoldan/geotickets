@@ -20,7 +20,7 @@ GeoTickets::Application.routes.draw do
   end
 
   resources :worked_hours do
-    get :extra, on: :collection
+    get :hours_by_day, :extra, on: :collection
   end
 
   resources :tags

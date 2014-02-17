@@ -13,8 +13,13 @@
   #worked-hours-index
     #tabs-controller{'ng-controller' => 'WorkedHoursListCtrl'}
       %tabset{type: "'pills'", vertical: 'true'}
-        %tab{'ng-repeat' => 'tab in tabs', heading: '{{tab.name}}', select: 'changeDay(tab.date)',
-                                           active: 'tab.active'}
+        %tab{'ng-repeat' => 'tab in tabs', select: 'changeDay(tab.date)', active: 'tab.active'}
+          %tab-heading
+            {{tab.name}}
+            %span.badge.badge-white.pull-right
+              {{tab.hours}}
+
+
           #day-wrapper
             = render 'templates/worked_hours/form'
             = render 'templates/worked_hours/tables'

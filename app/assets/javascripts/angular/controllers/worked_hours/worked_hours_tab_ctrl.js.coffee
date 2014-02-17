@@ -1,6 +1,6 @@
 # Worked hours tabs controller.
 #
-@Geoticket.controller 'WorkedHourTabCtrl', ($scope) ->
+@Geoticket.controller 'WorkedHourTabCtrl', ($scope, $filter, WorkedHour) ->
   $scope.datepicker = (1).day().ago()
   $scope.tabs = []
 
@@ -21,11 +21,23 @@
   # Tab shared data.
   #
   addDay = (day) ->
-    $scope.tabs[$scope.tabs.length] = {
-      name: day.toString('dd - dddd'),
+    actual_index = $scope.tabs.length
+
+    $scope.tabs[actual_index] = {
+      name: day.toString('dd - ddd'),
       date: day.toString('yyyy-MM-dd'),
       active: day.equals($scope.datepicker)
     }
+
+    WorkedHour.hours_by_day {on: day.toString('yyyy-MM-dd')}, (hours) ->
+      $scope.tabs[actual_index]['hours'] = $filter('hoursAndMinutes')(hours.amount)
+
+  #
+  #
+  $scope.$on 'refresh_tab', ->
+    _.each $scope.tabs, (tab) ->
+      WorkedHour.hours_by_day {on: tab.date}, (hours) ->
+        tab['hours'] = $filter('hoursAndMinutes')(hours.amount)
 
   # Moves to previous week.
   #
@@ -47,4 +59,4 @@
 
     generateTabs($scope.datepicker) if _new
 
-.$inject = ['$scope']
+.$inject = ['$scope', '$filter', 'WorkedHour']
