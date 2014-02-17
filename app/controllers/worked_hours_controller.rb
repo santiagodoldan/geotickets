@@ -1,18 +1,23 @@
 class WorkedHoursController < ApplicationController
 
-  before_filter :preload_worked_hours, only: [:index]
-
   load_and_authorize_resource through: :current_user
 
-  # Lists all the worked hours for current user or if having
-  #   an specific sprint context only the worked hours for that srint.
+  before_filter :filter_by_date, only: [:index, :extra]
+
+  # Lists all the worked hours for current user
   #
   # GET /worked_hours
-  # GET /sprints/:sprint_id/worked_hours
   def index
-    if params[:on]
-      @worked_hours = @worked_hours.search(on_eq: params[:on]).result
-    end
+    @worked_hours = @worked_hours.not_extra
+
+    respond_with(@worked_hours)
+  end
+
+  # Lists all the extra worked hours for current user
+  #
+  # GET /worked_hours/extra
+  def extra
+    @worked_hours = @worked_hours.extra
 
     respond_with(@worked_hours)
   end
@@ -46,15 +51,8 @@ class WorkedHoursController < ApplicationController
 
   private
 
-  # Returns the correct worked hours depending on current path.
-  #
-  # @return [ActiveRecord::Relation<WorkedHour>]
-  def preload_worked_hours
-    @worked_hours = if params[:sprint_id].present?
-      Sprint.find(params[:sprint_id]).worked_hours
-    else
-      current_user.worked_hours
-    end
+  def filter_by_date
+    @worked_hours = @worked_hours.search(on_eq: params[:on]).result if params[:on]
   end
 
 end

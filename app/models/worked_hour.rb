@@ -6,6 +6,8 @@ class WorkedHour < ActiveRecord::Base
   belongs_to :tag
 
   scope :in_week, -> date { where(on: date.beginning_of_week..date.end_of_week) }
+  scope :extra, -> { joins(:tag).where(tags: {name: Tag::EXTRA}) }
+  scope :not_extra, -> { joins(:tag).where('tags.name <> ?', Tag::EXTRA) }
 
   validates :tag, :user, presence: true
 

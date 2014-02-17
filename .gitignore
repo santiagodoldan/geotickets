@@ -2,3 +2,8 @@
 tmp/*
 .rvmrc
 log/*
+
+.ruby-version
+.ruby-gemset
+
+config/database.yml

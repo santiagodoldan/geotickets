@@ -1,0 +1,16 @@
+%h4 Project Hours
+
+%table.table.table-bordered
+  = render 'templates/worked_hours/table_headers'
+  %tbody
+    %tr{'ng-repeat' => 'worked_hour in worked_hours'}
+      = render 'templates/worked_hours/row'
+
+
+%h4 Out Of Project Hours
+
+%table.table.table-bordered
+  = render 'templates/worked_hours/table_headers'
+  %tbody
+    %tr{'ng-repeat' => 'worked_hour in extra_worked_hours'}
+      = render 'templates/worked_hours/row'

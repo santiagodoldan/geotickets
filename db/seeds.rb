@@ -11,6 +11,7 @@ Tag.create(name: 'Design')
 Tag.create(name: 'Management')
 Tag.create(name: 'Planning')
 Tag.create(name: 'Review')
+Tag.create(name: Tag::EXTRA)
 
 sprint_1 = Sprint.create(display_name: 'Sprint 1', status: 1, start_date: 2.weeks.ago, end_date: 1.day.ago)
 

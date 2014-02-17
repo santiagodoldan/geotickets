@@ -1,0 +1,27 @@
+%td
+  {{worked_hour.ticket.display_name | showValueOrNone}}
+%td
+  .non-editable{'ng-hide' => 'worked_hour.editing'}
+    {{worked_hour.description | showValueOrNone}}
+  .editable{'ng-show' => 'worked_hour.editing'}
+    %input.input-large{'ng-model' => 'worked_hour.description'}
+%td
+  .non-editable{'ng-hide' => 'worked_hour.editing'}
+    {{worked_hour.amount | hoursAndMinutes}}
+  .editable{'ng-show' => 'worked_hour.editing'}
+    %input.input-mini{'ng-model' => 'worked_hour.amount'}
+%td
+  {{worked_hour.user.name}}
+%td
+  %span.label {{worked_hour.tag.name}}
+%td
+  .non-editable{'ng-hide' => 'worked_hour.editing'}
+    = link_to '#', class: 'btn btn-mini btn-primary', 'ng-click' => 'worked_hour.editing=true;' do
+      %i.icon-edit
+
+    = link_to '#', class: 'btn btn-mini btn-danger', 'ng-click' => 'remove($index)' do
+      %i.icon-remove
+
+  .editable{'ng-show' => 'worked_hour.editing'}
+    = link_to '#', class: 'btn btn-mini btn-primary', 'ng-click' => 'update($index)' do
+      %i.icon-ok

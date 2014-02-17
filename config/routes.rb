@@ -13,14 +13,16 @@ GeoTickets::Application.routes.draw do
 
     resources :stories, except: [:new, :edit]
     resources :tickets, only: [:index]
-    resources :worked_hours, only: [:index]
   end
 
   resources :stories, only: [] do
     resources :tickets, except: [:new, :edit]
   end
 
-  resources :worked_hours
+  resources :worked_hours do
+    get :extra, on: :collection
+  end
+
   resources :tags
 
   resources :users do

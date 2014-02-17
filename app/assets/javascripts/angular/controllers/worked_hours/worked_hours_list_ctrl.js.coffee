@@ -2,7 +2,8 @@
 #
 @Geoticket.controller 'WorkedHoursListCtrl', ($scope, $timeout, hours, WorkedHour, SprintTicket, Tag) ->
   
-  $scope.worked_hours = {}
+  $scope.worked_hours = []
+  $scope.extra_worked_hours = []
   $scope.current_date = Date.today()
   $scope.tags = Tag.query()
 
@@ -34,13 +35,7 @@
     $scope.current_date = date
 
     $scope.worked_hours = WorkedHour.query({on: date})
-
-  # Returns the sum of each worked hour amount.
-  #
-  $scope.sumHours = ->
-    _.reduce $scope.worked_hours, (sum, wh) ->
-      sum + Number(hours.convertNumber(String(wh.amount)))
-    , 0
+    $scope.extra_worked_hours = WorkedHour.extra({on: date})
 
   # Retrieve associated tickets for current sprint.
   #
